@@ -3,7 +3,7 @@
     "description": "Search translation keys and insert into json to be translated",
     "type": "library",
     "license": "MIT",
-    "minimum-stability": "master",
+    "minimum-stability": "dev-master",
     "authors": [
         {
             "name": "Alexey Bob",
