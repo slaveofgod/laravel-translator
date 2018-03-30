@@ -3,7 +3,6 @@
     "description": "Search translation keys and insert into json to be translated",
     "type": "library",
     "license": "MIT",
-    "minimum-stability": "dev-master",
     "authors": [
         {
             "name": "Alexey Bob",
@@ -19,7 +18,7 @@
         "phpunit/phpunit": "~6.0"
     },
     "autoload": {
-        "psr-0": {
+        "psr-4": {
             "Translator\\": "src/"
         },
         "files": [
@@ -27,7 +26,7 @@
         ]
     },
     "autoload-dev": {
-        "psr-0": {
+        "psr-4": {
             "Translator\\Tests\\": "tests/"
         }
     },
