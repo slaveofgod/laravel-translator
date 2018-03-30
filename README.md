@@ -3,7 +3,7 @@
 ### Installation
 
 ```sh
-$ composer require alexeybob/laravel-translator
+$ composer require alexeybob/laravel-translator:dev-master
 ```
 
 Commands:
