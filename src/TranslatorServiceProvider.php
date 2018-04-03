@@ -15,7 +15,7 @@ class TranslatorServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-                \Translator\Console\TranslationExtractCommand::class,
+                \Translator\Console\TranslationUpdateCommand::class,
             ]);
         }
     }
