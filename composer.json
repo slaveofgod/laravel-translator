@@ -22,7 +22,7 @@
             "Translator\\": "src/"
         },
         "files": [
-            "src/helpers.php"
+            "src/Helpers/CommonHelper.php"
         ]
     },
     "autoload-dev": {

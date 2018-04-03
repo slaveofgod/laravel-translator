@@ -18,6 +18,8 @@ use Symfony\Component\Finder\Finder;
 class TranslationUpdateCommand extends Command
 {
     
+    use \Translator\Traits\TranslationTrait;
+    
     private $messages = [];
     
     private $translations = [];
@@ -50,6 +52,8 @@ class TranslationUpdateCommand extends Command
                                 {--clean : Should clean not found messages}
                                 
                                 {--prefix=__,@lang,trans_choice,@choice : Override the default prefix. Default "__,@lang,trans_choice,@choice"}
+                                
+                                {--domain= : Specify the domain to update}
                            ';
 
     /**
@@ -122,7 +126,8 @@ class TranslationUpdateCommand extends Command
         // load any existing messages from the translation files
         $this->comment('Loading translation files...');
         $this->line('');
-        $filePath = resource_path('lang/' . $this->argument('locale') . '.' . $this->option('output-format'));
+        
+        $filePath = $this->getFilePath();
         if (\File::exists($filePath)) {
             switch ($this->option('output-format')) {
                 case 'json': 
@@ -157,12 +162,7 @@ class TranslationUpdateCommand extends Command
             $this->comment('Writing files...');
 
             // backup
-            if (false === $this->option('no-backup') && count($this->translations) > 0) {
-                if (false === \File::isDirectory(resource_path('lang/backup/'))) {
-                    \File::makeDirectory(resource_path('lang/backup/'));
-                }
-                \File::copy($filePath, resource_path('lang/backup/' . $this->argument('locale') . '.' . date('U') . '.' . $this->option('output-format')));
-            }
+            $this->backupFile();
             
             $translations = $this->getProcessedTranslations($this->option('clean') ? true : false);
             
@@ -176,59 +176,5 @@ class TranslationUpdateCommand extends Command
         $this->info($resultMessage);
         
         return 1;
-    }
-    
-    private function loadAnyMessagesFromTemplates($contents, $prefix)
-    {
-        $parser = function ($pattern, $contents) {
-            preg_match_all($pattern, $contents, $matches, PREG_SET_ORDER, 0);
-            if (count( $matches ) > 0) {
-                foreach ($matches as $key => $value) {
-                    if (isset($value[1])) {
-                        if (array_key_exists($value[1], $this->messages)) {
-                            $this->messages[$value[1]]['count'] ++;
-                        } else {
-                            $this->messages[$value[1]] = array(
-                                'message' => $value[1],
-                                'count' => 1
-                            );
-                        }
-                    }
-                }
-            }
-        };
-        
-        $parser('/' . $prefix . '\(\s*\'([^\']+)\'[^)]*\)/i', $contents);
-        
-        $parser('/' . $prefix . '\(\s*\"([^"]+)\"[^)]*\)/i', $contents);
-    }
-    
-    private function getProcessedTranslations($clean = false)
-    {
-        $this->nonexistentTranslations = $this->translations;
-        foreach ($this->messages as $message) {
-            if(isset($this->nonexistentTranslations[$message['message']])) {
-                unset($this->nonexistentTranslations[$message['message']]);
-                
-            }
-        }
-        
-        foreach ($this->messages as $message) {
-            if(isset($this->translations[$message['message']])) {
-                $this->existingTranslations[$message['message']] = $this->translations[$message['message']];
-            }
-        }
-
-        foreach ($this->messages as $message) {
-            if (false === isset($this->translations[$message['message']])) {
-                $this->newTranslations[$message['message']] = '';
-            }
-        }
-        
-        if ( true === $clean ) {
-            return array_merge($this->existingTranslations, $this->newTranslations);
-        } else {
-            return array_merge($this->nonexistentTranslations, $this->existingTranslations, $this->newTranslations);
-        }
     }
 }

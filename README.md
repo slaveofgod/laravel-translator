@@ -20,6 +20,7 @@ $ php artisan translation:update {locale} {--force} {--dump-messages}
 * **--no-backup**: Should backup be disabled
 * **--clean**: Should clean not found messages
 * **--prefix**: Override the default prefix. Default "__,@lang,trans_choice,@choice"
+* **--domain**: Specify the domain to update
 
 
 
