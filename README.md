@@ -1,4 +1,6 @@
-# Laravel-Translator
+# Laravel Translations
+
+The most time-consuming tasks when translating an application is to extract all the template contents to be translated and to keep all the translation files in sync. This pacheg includes a command called `translation:update` that helps you with these tasks.
 
 ### Installation
 
