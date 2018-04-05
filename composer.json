@@ -11,7 +11,7 @@
     ],
     "require": {
         "php": ">=7.0.0",
-        "laravel/framework": ">=5.5.*",
+        "laravel/framework": ">=5.5.x",
         "symfony/finder": "~3.3"
     },
     "require-dev": {
