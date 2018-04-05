@@ -51,7 +51,7 @@ class TranslationUpdateCommand extends Command
                                 
                                 {--clean : Should clean not found messages}
                                 
-                                {--prefix=__,@lang,trans_choice,@choice : Override the default prefix. Default "__,@lang,trans_choice,@choice"}
+                                {--prefix=__,@lang,trans_choice,@choice,__ab,trans_choice_ab : Override the default prefix. Default "__,@lang,trans_choice,@choice,__ab,trans_choice_ab"}
                                 
                                 {--domain= : Specify the domain to update}
                            ';

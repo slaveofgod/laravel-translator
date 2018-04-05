@@ -19,7 +19,7 @@ $ php artisan translation:update {locale} {--force} {--dump-messages}
 * **--output-format**: Override the default output format. Default "json"
 * **--no-backup**: Should backup be disabled
 * **--clean**: Should clean not found messages
-* **--prefix**: Override the default prefix. Default "__,@lang,trans_choice,@choice"
+* **--prefix**: Override the default prefix. Default "__,@lang,trans_choice,@choice,__ab,trans_choice_ab"
 * **--domain**: Specify the domain to update
 
 
