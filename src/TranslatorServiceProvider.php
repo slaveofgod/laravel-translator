@@ -4,6 +4,9 @@ namespace Translator;
 
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * @author Alexey Bob <alexey.bob@gmail.com>
+ */
 class TranslatorServiceProvider extends ServiceProvider
 {
     /**

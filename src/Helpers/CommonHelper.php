@@ -28,33 +28,7 @@ if (! function_exists('__ab')) {
         } catch (\Exception $ex) {}
         
         // Save to log file when translation does not exist for this $key
-        
-        Log::channel($key);
-        
-        dd($key);
-        
-        Log::channel('alexeybob/laravel-translator')->info($key);
-        
-        dd($key);
-        
-        dd(app('translator')->has($key, 'en'));
-        
-        if (true === app('translator')->has($key, 'en')) {
-            
-            return __($key, $replace, $locale);
-        }
-        
-        dd($key);
-        
-        $line = __($key, [], $locale);
-        
-        // @todo Save to log file when translation does not exist for this $key
-        if ($line === $key) {
-            $locale = app()->getLocale();
-            $message = $key;
-
-            // Save to log file
-        }
+        Log::info('[TranslatorLogger] ' . json_encode(array('message' => $key, 'locale' => app()->getLocale())));
         
         return __($key, $replace, $locale);
     }
@@ -72,21 +46,15 @@ if (! function_exists('trans_choice_ab')) {
      */
     function trans_choice_ab($key, $number, array $replace = [], $locale = null)
     {
-        $lineDefault = trans_choice($key, [], [], 'en');
-        $line = trans_choice($key, [], [], $locale);
-        
-        dd($key, $lineDefault, $line);
-        
-        if ($line === $key) {
-            $locale = app()->getLocale();
-            $message = $key;
+        // Search translation in files from {locale} folder
+        if (true === Lang::has($key)) {
             
-            dd($key, $line);
-            
-            // Save to log file
+            return trans_choice($key, $number, $replace, $locale);
         }
-        // @todo Save to log file when translation does not exist for this $key
         
-        return trans_choice($key, $number, $replace, 'de');
+        // Save to log file when translation does not exist for this $key
+        Log::info('[TranslatorLogger] ' . json_encode(array('message' => $key, 'locale' => app()->getLocale())));
+        
+        return trans_choice($key, $number, $replace, $locale);
     }
 }
