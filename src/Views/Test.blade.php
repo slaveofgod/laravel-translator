@@ -15,3 +15,21 @@
 @lang('Table View: User')<br />
 
 @choice('{1} :value minute ago|[2,*] :value minutes ago', 5, ['value' => 5])<br />
+
+@lang('admin.Table View: User')<br />
+
+@lang('user.Table View: User')<br />
+
+@lang('member.Table View: User')<br />
+
+@lang('member.Table View: Members')<br />
+
+@lang('member.Table View: Members Hello')<br />
+
+@lang('admin.Table View: User1')<br />
+
+@lang('user.Table View: User1')<br />
+
+@lang('member.Table View: User1')<br />
+
+@lang('validation.Table View: User1')<br />

@@ -3,7 +3,7 @@
 namespace Translator\Console;
 
 use Illuminate\Console\Command;
-use Symfony\Component\Finder\Finder;
+use Translator\Services\TranslatorService;
 
 
 /**
@@ -17,18 +17,7 @@ use Symfony\Component\Finder\Finder;
  */
 class TranslationUpdateCommand extends Command
 {
-    
-    use \Translator\Traits\TranslationTrait;
-    
     private $messages = [];
-    
-    private $translations = [];
-    
-    private $newTranslations = [];
-    
-    private $existingTranslations = [];
-    
-    private $nonexistentTranslations = [];
     
     /**
      * The name and signature of the console command.
@@ -45,15 +34,11 @@ class TranslationUpdateCommand extends Command
                                 
                                 {--dump-messages : Should the messages be dumped in the console}
                                 
-                                {--output-format=json : Override the default output format. Default "json"}
-                                
                                 {--no-backup : Should backup be disabled}
                                 
                                 {--clean : Should clean not found messages}
                                 
                                 {--prefix=__,@lang,trans_choice,@choice,__ab,trans_choice_ab : Override the default prefix. Default "__,@lang,trans_choice,@choice,__ab,trans_choice_ab"}
-                                
-                                {--domain= : Specify the domain to update}
                            ';
 
     /**
@@ -87,15 +72,6 @@ class TranslationUpdateCommand extends Command
             return 1;
         }
         
-        // check format
-        $supportedFormats = array('json');
-        if (!in_array($this->option('output-format'), $supportedFormats)) {
-            $this->error('Wrong output format', 'Supported formats are: ' . implode(', ', $supportedFormats).'.');
-            $this->error('Supported formats are: ' . implode(', ', $supportedFormats).'.');
-
-            return 1;
-        }
-        
         // Define Root Paths
         $root_path = resource_path($this->argument('path'));
         if (!is_dir($root_path)) {
@@ -106,39 +82,15 @@ class TranslationUpdateCommand extends Command
         }
         
         $this->alert('Translation Messages Extractor and Dumper');
-        $this->comment(sprintf('Generating "<info>%s.%s</info>" translation file', $this->argument('locale'), $this->option('output-format')));
-        $this->line('');
-        
-        // load any messages from templates
+        $this->translator = new TranslatorService($this->argument('locale'), $root_path, $this->option('prefix'));
+
         $this->comment('Parsing templates...');
         $this->line('');
-        $finder = new Finder(); // https://symfony.com/doc/current/components/finder.html
-        $finder->files()->name('*.blade.php')->in($root_path);
-        foreach ($finder as $file) {
-            // $this->question('File: ' . $this->argument('path') . '/' . $file->getRelativePathname());
-            $contents = $file->getContents();
-            $prefixs = explode(',', $this->option('prefix'));
-            foreach ($prefixs as $prefix) {
-                $this->loadAnyMessagesFromTemplates($contents, $prefix);
-            }
-        }
-        
-        // load any existing messages from the translation files
         $this->comment('Loading translation files...');
         $this->line('');
         
-        $filePath = $this->getFilePath();
-        if (\File::exists($filePath)) {
-            switch ($this->option('output-format')) {
-                case 'json': 
-                    $this->translations = json_decode(\File::get($filePath), true);
-                    if (null === $this->translations) {
-                        $this->translations = [];
-                    }
-                    break;
-            }
-        }
-        
+        $this->messages = $this->translator->getMessages();
+
         // Exit if no messages found.
         if (!count($this->messages)) {
             $this->info('No translation messages were found.');
@@ -160,13 +112,30 @@ class TranslationUpdateCommand extends Command
         // save the files
         if (true === $this->option('force')) {
             $this->comment('Writing files...');
-
-            // backup
-            $this->backupFile();
             
-            $translations = $this->getProcessedTranslations($this->option('clean') ? true : false);
+            // add new messages
+            $this->translator->addNewMessages();
             
-            \File::put($filePath, json_encode($translations, JSON_PRETTY_PRINT));
+            if (true === $this->option('dump-messages')) {
+                $resources = $this->translator->getResources();
+                foreach ($resources as $resource) {
+                    if ($resource->hasNewMessages()) {
+                        $this->line('');
+                        $this->comment(sprintf('Generating/Updating "<info>%s</info>" translation file', $resource->getRelativePathname()));
+                        $this->table(array('Messages'), $resource->getNewMessages());
+                    }
+                }
+            }
+            
+            // clean not found messages
+            if (true === $this->option('clean')) {
+                if ($this->confirm('You specify to clean not found messages. Do you wish to clean not found messages?')) {
+                    $this->translator->clean();
+                }
+            }
+            
+            // save the resources
+            $this->translator->save($this->option('no-backup'));
             
             if (true === $this->option('dump-messages')) {
                 $resultMessage .= ' and translation files were updated';
