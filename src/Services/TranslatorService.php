@@ -60,7 +60,7 @@ class TranslatorService
      * @param string $prefixes
      * @param string $backupName
      */
-    public function __construct($locale, $path, $prefixes, $backupName = null)
+    public function __construct(string $locale, string $path, string $prefixes, string $backupName = null)
     {
         $this->locale = $locale;
         $this->path = $path;
@@ -89,7 +89,7 @@ class TranslatorService
      * 
      * @param boolean $noBackup
      */
-    public function save($noBackup = false)
+    public function save(bool $noBackup = false)
     {
         foreach ($this->resources as $resource) {
             $resource->save($noBackup);

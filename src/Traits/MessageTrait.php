@@ -14,7 +14,7 @@ trait MessageTrait
      * 
      * @return array
      */
-    public function getMessages()
+    public function getMessages() : array
     {
         return $this->messages;
     }
@@ -24,7 +24,7 @@ trait MessageTrait
      * @param string $key
      * @return string
      */
-    public function getMessage($key)
+    public function getMessage(string $key) : string
     {
         foreach ($this->messages as $message) {
             if ($key === $message['value']) {
@@ -40,7 +40,7 @@ trait MessageTrait
      * @param string $key
      * @return boolean
      */
-    public function hasMessage($key)
+    public function hasMessage(string $key) : bool
     {
         return (null !== $this->getMessage($key)) ? true : false;
     }
@@ -50,7 +50,7 @@ trait MessageTrait
      * @param string $message
      * @return string
      */
-    private function cleanMessage($message)
+    private function cleanMessage(string $message) : string
     {
         if (preg_match('/(^[a-zA-Z0-9]+)\.([\S].*)/', $message, $match)) {
             $message = $match[2];
@@ -61,9 +61,10 @@ trait MessageTrait
     
     /**
      * 
+     * @param boolean $tableView
      * @return array
      */
-    private function getNewMessages()
+    public function getNewMessages(bool $tableView = false) : array
     {
         $translations = [];
         $newMessages = [];
@@ -78,7 +79,7 @@ trait MessageTrait
             }
         }
         
-        return $newMessages;
+        return (false === $tableView) ? $newMessages : $this->tableView($newMessages);
     }
     
     /**
@@ -124,7 +125,7 @@ trait MessageTrait
      * @param string $contents
      * @param string $prefix
      */
-    private function extractMessagesFromContents($contents, $prefix)
+    private function extractMessagesFromContents(string $contents, string $prefix)
     {
         $this->extractMessagesFromContentsByPattern('/' . $prefix . '\(\s*\'([^\']+)\'[^)]*\)/i', $contents);
         $this->extractMessagesFromContentsByPattern('/' . $prefix . '\(\s*\"([^"]+)\"[^)]*\)/i', $contents);
@@ -135,7 +136,7 @@ trait MessageTrait
      * @param string $pattern
      * @param string $contents
      */
-    private function extractMessagesFromContentsByPattern($pattern, $contents)
+    private function extractMessagesFromContentsByPattern(string $pattern, string $contents)
     {
         preg_match_all($pattern, $contents, $matches, PREG_SET_ORDER, 0);
         
@@ -153,5 +154,21 @@ trait MessageTrait
                 }
             }
         }
+    }
+
+    /**
+     * 
+     * @param array $data
+     * @return array
+     */
+    private function tableView(array $data) : array
+    {
+        foreach ($data as $key => $value) {
+            if (false === is_array($value)) {
+                $data[$key] = array('value' => $value);
+            }
+        }
+        
+        return $data;
     }
 }

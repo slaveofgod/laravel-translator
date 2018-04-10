@@ -20,12 +20,16 @@ class TranslatorServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 \Translator\Console\TranslationUpdateCommand::class,
+                \Translator\Console\TranslationDiffCommand::class,
             ]);
             
             $this->validationRules();
         }
     }
     
+    /**
+     * 
+     */
     private function validationRules()
     {
         \Validator::extend('locale', function($attribute, $value, $parameters, $validator) {

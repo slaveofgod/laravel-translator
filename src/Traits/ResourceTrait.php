@@ -16,7 +16,7 @@ trait ResourceTrait
      * 
      * @return array
      */
-    public function getResources()
+    public function getResources() : array
     {
         return $this->resources;
     }
@@ -27,7 +27,7 @@ trait ResourceTrait
      * @param string $format
      * @return ResourceFacade
      */
-    private function addResource($path, $format)
+    private function addResource(string $path, string $format) : ResourceFacade
     {
         $resource = new ResourceFacade($path, $format, $this->backupName);
         $this->resources[] = $resource;
@@ -69,7 +69,7 @@ trait ResourceTrait
      * @param string $filePath
      * @return ResourceFacade
      */
-    private function getOrLoadResource($filePath)
+    private function getOrLoadResource(string $filePath) : ResourceFacade
     {
         $resource = $this->findResourceByFilePath($filePath);
         if (null === $resource) {
@@ -84,7 +84,7 @@ trait ResourceTrait
      * @param string $filePath
      * @return ResourceFacade
      */
-    private function findResourceByFilePath($filePath)
+    private function findResourceByFilePath(string $filePath)
     {
         foreach ($this->resources as $resource) {
             if ($filePath === $resource->getPath()) {
