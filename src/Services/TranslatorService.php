@@ -77,9 +77,12 @@ class TranslatorService
     public function clean()
     {
         foreach ($this->resources as $resource) {
-            foreach ($resource->getTranslations() as $key => $value) {
-                if (false === $this->hasMessage($key)) {
-                    $resource->deleteMessage($this->cleanMessage($key));
+            
+            if (false === in_array($resource->getFileBaseName(), ['validation', 'auth', 'passwords', 'pagination'])) {
+                foreach ($resource->getTranslations() as $key => $value) {
+                    if (false === $this->hasMessage($key)) {
+                        $resource->deleteMessage($this->cleanMessage($key));
+                    }
                 }
             }
         }

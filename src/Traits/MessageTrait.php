@@ -22,9 +22,9 @@ trait MessageTrait
     /**
      * 
      * @param string $key
-     * @return string
+     * @return mixed
      */
-    public function getMessage(string $key) : string
+    public function getMessage(string $key)
     {
         foreach ($this->messages as $message) {
             if ($key === $message['value']) {

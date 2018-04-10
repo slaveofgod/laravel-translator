@@ -28,7 +28,7 @@ Options:
  force | Should the update be done | false
  dump-messages |  Should the messages be dumped in the console | false 
  no-backup | Should backup not be done | false
- clean | Should clean not found messages | false 
+ clean | Should clean not found messages. But we will ignore next files: 'validation', 'auth', 'passwords', 'pagination' | false 
  prefix | Override the default prefix. | __,@lang,trans_choice,@choice,__ab,trans_choice_ab 
 
 ### Diff Command:

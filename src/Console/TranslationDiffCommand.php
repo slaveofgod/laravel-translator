@@ -18,7 +18,7 @@ use Illuminate\Http\Exceptions\HttpResponseException;
  */
 class TranslationDiffCommand extends Command
 {
-    private $messages = [];
+    private $newMessages = [];
     
     /**
      * The name and signature of the console command.
