@@ -30,6 +30,24 @@ Options:
  clean | Should clean not found messages | false 
  prefix | Override the default prefix. | __,@lang,trans_choice,@choice,__ab,trans_choice_ab 
 
+### Update Command:
+```sh
+php artisan translation:diff en
+```
+Arguments:
+
+ Name | Description | Default
+:---------|:----------|:----------
+ locale | The locale | - 
+ path |  Directory where to load the messages | views 
+ 
+ Options:
+
+ Name | Description | Default
+:---------|:----------|:----------
+ prefix | Override the default prefix. | __,@lang,trans_choice,@choice,__ab,trans_choice_ab
+
+-------
 
 if for any reason artisan can't find commands, you can register the provider manually on your `config/app.php` file:
 
