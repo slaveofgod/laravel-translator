@@ -4,6 +4,7 @@ namespace Translator\Console;
 
 use Illuminate\Console\Command;
 use Translator\Services\TranslatorService;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 
 /**
@@ -46,7 +47,7 @@ class TranslationUpdateCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Extract translations from source code.';
+    protected $description = 'Update translations from source code.';
 
     /**
      * Create a new command instance.
@@ -65,6 +66,19 @@ class TranslationUpdateCommand extends Command
      */
     public function handle()
     {
+        // validate locale
+        $validator = \Validator::make(['locale' => $this->argument('locale')], ['locale' => 'required|locale']);
+        if ($validator->fails()) {
+            $this->error('Locale Errors:');
+            foreach ($validator->errors()->getMessages() as $key => $errors) {
+                foreach ($errors as $error) {
+                    $this->error('  • ' . $key . ': ' .  $error);
+                }
+            }
+            
+            return 1;
+        }
+        
         // check presence of force or dump-message
         if (true !== $this->option('force') && true !== $this->option('dump-messages')) {
             $this->error('You must choose one of --force or --dump-messages');

@@ -10,20 +10,50 @@ use Illuminate\Filesystem\Filesystem;
  */
 class ResourceFacade
 {
+    /**
+     *
+     * @var string
+     */
     private $path;
     
+    /**
+     *
+     * @var string
+     */
     private $format;
     
+    /**
+     *
+     * @var string
+     */
     private $backupName;
     
+    /**
+     *
+     * @var boolean
+     */
     private $isModified = false;
     
+    /**
+     *
+     * @var array
+     */
     private $messages = [];
     
+    /**
+     *
+     * @var array
+     */
     private $newMessages = [];
     
     
     
+    /**
+     * 
+     * @param string $path
+     * @param string $format
+     * @param string $backupName
+     */
     public function __construct($path, $format, $backupName)
     {
         $this->path = $path;
@@ -33,6 +63,19 @@ class ResourceFacade
         $this->messages = $this->getContents();
     }
     
+    /**
+     * 
+     * @return array
+     */
+    public function getMessages()
+    {
+        return $this->messages;
+    }
+    
+    /**
+     * 
+     * @return array
+     */
     public function getContents()
     {
         $contents = [];
@@ -52,31 +95,55 @@ class ResourceFacade
         return $contents;
     }
     
+    /**
+     * 
+     * @return string
+     */
     public function getPath()
     {
         return $this->path;
     }
     
+    /**
+     * 
+     * @return string
+     */
     public function getFileBaseName()
     {
         return pathinfo($this->path,  PATHINFO_FILENAME);
     }
     
+    /**
+     * 
+     * @return boolean
+     */
     public function isFileExist()
     {
         return (new Filesystem)->isFile($this->path);
     }
     
+    /**
+     * 
+     * @return string
+     */
     public function getRelativePathname()
     {
         return str_replace(resource_path() . '/', "", $this->path);
     }
     
+    /**
+     * 
+     * @return string
+     */
     public function getLocalPathname()
     {
         return str_replace(resource_path() . '/lang/', "", $this->path);
     }
     
+    /**
+     * 
+     * @return array
+     */
     public function getTranslations()
     {
         $contents = $this->getContents();
@@ -99,6 +166,11 @@ class ResourceFacade
         return $translations;
     }
     
+    /**
+     * 
+     * @param string $message
+     * @param string $value
+     */
     public function addMessage($message, $value = "")
     {
         $this->messages[$message] = $value;
@@ -108,6 +180,10 @@ class ResourceFacade
         $this->isModified = true;
     }
     
+    /**
+     * 
+     * @param string $message
+     */
     public function deleteMessage($message)
     {
         if (isset($this->messages[$message])) {
@@ -116,6 +192,10 @@ class ResourceFacade
         }
     }
     
+    /**
+     * 
+     * @param boolean $noBackup
+     */
     public function save($noBackup = false)
     {
         if (
@@ -143,6 +223,9 @@ class ResourceFacade
         }
     }
     
+    /**
+     * 
+     */
     private function backup()
     {
         $filePath = resource_path('lang/backup/' . $this->backupName . '/' . $this->getLocalPathname());
@@ -152,23 +235,30 @@ class ResourceFacade
         \File::copy($this->path, $filePath);
     }
     
+    /**
+     * 
+     * @return boolean
+     */
     public function isModified()
     {
         return $this->isModified;
     }
     
+    /**
+     * 
+     * @return boolean
+     */
     public function hasNewMessages()
     {
         return (count($this->newMessages) > 0) ? true : false;
     }
     
+    /**
+     * 
+     * @return string
+     */
     public function getNewMessages()
     {
         return $this->newMessages;
-    }
-    
-    public function getMessages()
-    {
-        return $this->messages;
     }
 }
