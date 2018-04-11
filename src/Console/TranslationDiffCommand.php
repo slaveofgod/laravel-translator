@@ -86,19 +86,25 @@ class TranslationDiffCommand extends Command
         $this->comment('Parsing templates...');
         $this->line('');
         $this->comment('Loading translation files...');
-        $this->line('');
         
-        $this->newMessages = $this->translator->getNewMessages(true);
-
-        // Exit if no new messages found.
-        if (!count($this->newMessages)) {
-            $this->info('No new translation messages were found.');
-        } else {
-            $this->comment(sprintf('New messages found (%d message%s) for the "<info>%s</info>" locale', count($this->newMessages), count($this->newMessages) > 1 ? 's' : '', $this->argument('locale')));
-            
-            $this->table(array('Messages'), $this->newMessages);
+        // Extracting new messages
+        $hasNewMessages = false;
+        $this->translator->addNewMessages();
+        $resources = $this->translator->getResources();
+        foreach ($resources as $resource) {
+            if ($resource->hasNewMessages()) {
+                $this->line('');
+                $this->comment(sprintf('New messages found (%d message%s) for "<info>%s</info>" translation file', count($resource->getNewMessages()), count($resource->getNewMessages()) > 1 ? 's' : '', $resource->getRelativePathname()));
+                $this->table(array('Messages'), $resource->getNewMessages());
+                $hasNewMessages = true;
+            }
         }
-
+        
+        if (false === $hasNewMessages) {
+            $this->line('');
+            $this->info('No new translation messages found.');
+        }
+        
         return ;
     }
 }
