@@ -7,15 +7,15 @@ use Translator\Services\TranslatorService;
 
 
 /**
- * A command that parses templates to extract translation messages and adds them
- * into the translation files.
+ * A command that parses templates to extract translation messages and
+ * compares with untracked messages and displays them to the console.
  *
  * @author Alexey Bob <alexey.bob@gmail.com>
  *
  * @final
- * @example php artisan translation:update en --dump-messages --force
+ * @example php artisan translation:untracked en --dump-messages --force
  */
-class TranslationUpdateCommand extends Command
+class TranslationUntrackedCommand extends Command
 {
     private $messages = [];
     
@@ -24,21 +24,15 @@ class TranslationUpdateCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'translation:update
+    protected $signature = 'translation:untracked
         
                                 {locale : The locale}
-                                
-                                {path=views : Directory where to load the messages, defaults to views folder}
                                 
                                 {--force : Should the update be done}
                                 
                                 {--dump-messages : Should the messages be dumped in the console}
                                 
                                 {--no-backup : Should backup not be done}
-                                
-                                {--clean : Should clean not found messages}
-                                
-                                {--prefix=__,@lang,trans_choice,@choice,__ab,trans_choice_ab : Override the default prefix. Default "__,@lang,trans_choice,@choice,__ab,trans_choice_ab"}
                            ';
 
     /**
@@ -46,7 +40,7 @@ class TranslationUpdateCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Update translations from source code.';
+    protected $description = 'Update translations with untracked messages.';
 
     /**
      * Create a new command instance.
@@ -85,17 +79,17 @@ class TranslationUpdateCommand extends Command
             return 1;
         }
         
-        // Define Root Paths
-        $root_path = resource_path($this->argument('path'));
-        if (!is_dir($root_path)) {
-            
-            $this->error(sprintf('"%s" is neither a file nor a directory of resources.', $this->argument('path')));
-            
-            return 1;
-        }
+//        // Define Root Paths
+//        $root_path = resource_path($this->argument('path'));
+//        if (!is_dir($root_path)) {
+//            
+//            $this->error(sprintf('"%s" is neither a file nor a directory of resources.', $this->argument('path')));
+//            
+//            return 1;
+//        }
         
         $this->alert('Translation Messages Extractor and Dumper');
-        $this->translator = new TranslatorService($this->argument('locale'), $root_path, $this->option('prefix'));
+        $this->translator = new TranslatorService($this->argument('locale'), null, null, null, 'untracked');
 
         $this->comment('Parsing templates...');
         $this->line('');
@@ -137,13 +131,6 @@ class TranslationUpdateCommand extends Command
                         $this->comment(sprintf('Generating/Updating "<info>%s</info>" translation file', $resource->getRelativePathname()));
                         $this->table(array('Messages'), $resource->getNewMessages());
                     }
-                }
-            }
-            
-            // clean not found messages
-            if (true === $this->option('clean')) {
-                if ($this->confirm('You specify to clean not found messages. Do you wish to clean not found messages?')) {
-                    $this->translator->clean();
                 }
             }
             

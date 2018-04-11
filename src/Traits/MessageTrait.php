@@ -3,6 +3,7 @@
 namespace Translator\Traits;
 
 use Symfony\Component\Finder\Finder;
+use Illuminate\Filesystem\Filesystem;
 
 
 /**
@@ -85,7 +86,7 @@ trait MessageTrait
     /**
      * 
      */
-    public function addNewMessages()
+    public function addNewMessages() : void
     {
         foreach ($this->getNewMessages() as $message) {
             $filePath = resource_path('lang/' . $this->locale . '.json');
@@ -103,7 +104,7 @@ trait MessageTrait
     /**
      * 
      */
-    private function extractMessages()
+    private function extractViewMessages() : void
     {
         $finder = new Finder();
         $finder->files()->name('*.blade.php')->in($this->path);
@@ -122,10 +123,41 @@ trait MessageTrait
     
     /**
      * 
+     */
+    private function extractUntrackedMessages() : void
+    {
+        $contents = [];
+        try {
+            $contents = explode(PHP_EOL, (new Filesystem)->get(base_path(sprintf('storage/logs/%s', \Config::get('translator_log')))));
+        } catch (\Exception $ex) {}
+        
+        foreach ($contents as $content) {
+            try {
+                $message = json_decode($content, true);
+                if ( $this->locale === $message['locale'] ) {
+                    if (array_key_exists($message['message'], $this->messages)) {
+                        $this->messages[$message['message']]['count'] ++;
+                    } else {
+                        $this->messages[$message['message']] = array(
+                            'value' => $message['message'],
+                            'count' => 1
+                        );
+                    }
+                }
+            } catch (\Exception $ex) {}
+        }
+        
+        usort($this->messages, function ($a, $b) {
+            return ($a['count'] <  $b['count']);
+        });
+    }
+    
+    /**
+     * 
      * @param string $contents
      * @param string $prefix
      */
-    private function extractMessagesFromContents(string $contents, string $prefix)
+    private function extractMessagesFromContents(string $contents, string $prefix) : void
     {
         $this->extractMessagesFromContentsByPattern('/' . $prefix . '\(\s*\'([^\']+)\'[^)]*\)/i', $contents);
         $this->extractMessagesFromContentsByPattern('/' . $prefix . '\(\s*\"([^"]+)\"[^)]*\)/i', $contents);
@@ -136,7 +168,7 @@ trait MessageTrait
      * @param string $pattern
      * @param string $contents
      */
-    private function extractMessagesFromContentsByPattern(string $pattern, string $contents)
+    private function extractMessagesFromContentsByPattern(string $pattern, string $contents) : void
     {
         preg_match_all($pattern, $contents, $matches, PREG_SET_ORDER, 0);
         

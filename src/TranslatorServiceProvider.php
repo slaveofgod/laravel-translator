@@ -17,10 +17,13 @@ class TranslatorServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->setConfig();
+        
         if ($this->app->runningInConsole()) {
             $this->commands([
                 \Translator\Console\TranslationUpdateCommand::class,
                 \Translator\Console\TranslationDiffCommand::class,
+                \Translator\Console\TranslationUntrackedCommand::class,
             ]);
             
             $this->validationRules();
@@ -30,7 +33,15 @@ class TranslatorServiceProvider extends ServiceProvider
     /**
      * 
      */
-    private function validationRules()
+    private function setConfig() : void
+    {
+        \Config::set('translator_log', 'translator.log');
+    }
+    
+    /**
+     * 
+     */
+    private function validationRules() : void
     {
         \Validator::extend('locale', function($attribute, $value, $parameters, $validator) {
 

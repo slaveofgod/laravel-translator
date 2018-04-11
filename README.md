@@ -5,7 +5,7 @@ The most time-consuming tasks when translating an application is to extract all 
 ## Installation
 
 ```sh
-$ composer require alexeybob/laravel-translator:dev-master
+$ composer require alexeybob/laravel-translator 1.1
 ```
 
 ## Commands:
@@ -30,6 +30,27 @@ Options:
  no-backup | Should backup not be done | false
  clean | Should clean not found messages. But we will ignore next files: 'validation', 'auth', 'passwords', 'pagination' | false 
  prefix | Override the default prefix. | __,@lang,trans_choice,@choice,__ab,trans_choice_ab 
+
+### Update Command:
+Update translations with untracked messages. If you want to be able to tracked untracked messages please use `__ab` and `trans_choice_ab`.
+What is **untracked** message: {{ __($message) }} or {{ trans_choice($message, 5, ['value' => 5]) }}.
+When you use `__ab` or `trans_choice_ab` function they will work the same way as `__` and `trans_choice` plus loging all this message to the special log file.
+```sh
+$ php artisan translation:untracked {locale} {--force} {--dump-messages}
+```
+Arguments:
+
+ Name | Description | Default
+:---------|:----------|:----------
+ locale | The locale | - 
+ 
+Options:
+
+ Name | Description | Default
+:---------|:----------|:----------
+ force | Should the update be done | false
+ dump-messages |  Should the messages be dumped in the console | false 
+ no-backup | Should backup not be done | false
 
 ### Diff Command:
 Difference between translation files and source code messages.

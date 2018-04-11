@@ -171,7 +171,7 @@ class ResourceFacade
      * @param string $message
      * @param string $value
      */
-    public function addMessage($message, $value = "")
+    public function addMessage($message, $value = "") : void
     {
         $this->messages[$message] = $value;
         
@@ -184,7 +184,7 @@ class ResourceFacade
      * 
      * @param string $message
      */
-    public function deleteMessage($message)
+    public function deleteMessage($message) : void
     {
         if (isset($this->messages[$message])) {
             unset($this->messages[$message]);
@@ -196,7 +196,7 @@ class ResourceFacade
      * 
      * @param boolean $noBackup
      */
-    public function save($noBackup = false)
+    public function save($noBackup = false) : void
     {
         if (
             true === $this->isModified
@@ -226,7 +226,7 @@ class ResourceFacade
     /**
      * 
      */
-    private function backup()
+    private function backup() : void
     {
         $filePath = resource_path('lang/backup/' . $this->backupName . '/' . $this->getLocalPathname());
         if (false === \File::isDirectory(dirname($filePath))) {

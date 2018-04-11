@@ -4,12 +4,11 @@ namespace Translator\Console;
 
 use Illuminate\Console\Command;
 use Translator\Services\TranslatorService;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
 
 /**
- * A command that parses templates to extract translation messages and adds them
- * into the translation files.
+ * A command that parses templates to extract translation messages and
+ * displays them to the console.
  *
  * @author Alexey Bob <alexey.bob@gmail.com>
  *

@@ -59,8 +59,9 @@ class TranslatorService
      * @param string $path
      * @param string $prefixes
      * @param string $backupName
+     * @param string $extract
      */
-    public function __construct(string $locale, string $path, string $prefixes, string $backupName = null)
+    public function __construct(string $locale, string $path = null, string $prefixes = null, string $backupName = null, string $extract = 'view')
     {
         $this->locale = $locale;
         $this->path = $path;
@@ -68,13 +69,17 @@ class TranslatorService
         $this->backupName = (null !== $backupName) ? $backupName : date('Y-m-d\TH:i:s');
         
         $this->loadResources();
-        $this->extractMessages();
+        if ('view' === $extract) {
+            $this->extractViewMessages();
+        } else {
+            $this->extractUntrackedMessages();
+        }
     }
     
     /**
      * 
      */
-    public function clean()
+    public function clean() : void
     {
         foreach ($this->resources as $resource) {
             
@@ -92,7 +97,7 @@ class TranslatorService
      * 
      * @param boolean $noBackup
      */
-    public function save(bool $noBackup = false)
+    public function save(bool $noBackup = false) : void
     {
         foreach ($this->resources as $resource) {
             $resource->save($noBackup);

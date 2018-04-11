@@ -28,7 +28,10 @@ if (! function_exists('__ab')) {
         } catch (\Exception $ex) {}
         
         // Save to log file when translation does not exist for this $key
-        Log::info('[TranslatorLogger] ' . json_encode(array('message' => $key, 'locale' => app()->getLocale())));
+        (new Filesystem)->append(
+                base_path(sprintf('storage/logs/%s', \Config::get('translator_log'))),
+                json_encode(array('message' => $key, 'locale' => app()->getLocale())) . "\n"
+            );
         
         return __($key, $replace, $locale);
     }
@@ -53,7 +56,10 @@ if (! function_exists('trans_choice_ab')) {
         }
         
         // Save to log file when translation does not exist for this $key
-        Log::info('[TranslatorLogger] ' . json_encode(array('message' => $key, 'locale' => app()->getLocale())));
+        (new Filesystem)->append(
+                base_path(sprintf('storage/logs/%s', \Config::get('translator_log'))),
+                json_encode(array('message' => $key, 'locale' => app()->getLocale())) . "\n"
+            );
         
         return trans_choice($key, $number, $replace, $locale);
     }
