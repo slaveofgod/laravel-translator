@@ -1,6 +1,6 @@
 # Laravel Translations
 
-The most time-consuming tasks when translating an application is to extract all the template contents to be translated and to keep all the translation files in sync. This pacheg includes a command called `translation:update` that helps you with these tasks.
+The most time-consuming tasks when translating an application is to extract all the template contents to be translated and to keep all the translation files in sync. This package includes a command called `translation:update` that helps you with these tasks.
 
 ## Installation
 
@@ -19,7 +19,7 @@ Arguments:
  Name | Description | Default
 :---------|:----------|:----------
  locale | The locale | - 
- path |  Directory where to load the messages | views 
+ path | Directory where to extract the messages | views 
  
 Options:
 
@@ -41,7 +41,7 @@ Arguments:
  Name | Description | Default
 :---------|:----------|:----------
  locale | The locale | - 
- path |  Directory where to load the messages | views 
+ path | Directory where to extract the messages | views 
  
  Options:
 
