@@ -31,10 +31,13 @@ Options:
  clean | Should clean not found messages. But we will ignore next files: 'validation', 'auth', 'passwords', 'pagination' | false 
  prefix | Override the default prefix. | __,@lang,trans_choice,@choice,__ab,trans_choice_ab 
 
-### Update Command:
-Update translations with untracked messages. If you want to be able to tracked untracked messages please use `__ab` and `trans_choice_ab`.
-What is **untracked** message: {{ __($message) }} or {{ trans_choice($message, 5, ['value' => 5]) }}.
-When you use `__ab` or `trans_choice_ab` function they will work the same way as `__` and `trans_choice` plus loging all this message to the special log file.
+### Update Untracked Command:
+Update translations with untracked messages.
+If you want to be able to tracked untracked messages please use `__ab` and `trans_choice_ab`.
+
+What is **untracked** message: `{{ __($message) }}` or `{{ trans_choice($message, 5, ['value' => 5]) }}`.
+
+When you use `__ab` or `trans_choice_ab` function they will work the same way as `__` and `trans_choice` plus loging all the messages to the special log file.
 ```sh
 $ php artisan translation:untracked {locale} {--force} {--dump-messages}
 ```
