@@ -13,6 +13,7 @@ use Translator\Facades\ResourceFacade;
 class TranslatorService
 {
     use \Translator\Traits\ResourceTrait;
+    
     use \Translator\Traits\MessageTrait;
     
     /**

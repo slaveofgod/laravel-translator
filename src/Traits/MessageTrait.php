@@ -134,7 +134,7 @@ trait MessageTrait
         foreach ($contents as $content) {
             try {
                 $message = json_decode($content, true);
-                if ($this->locale === $message['locale']) {
+//                if ($this->locale === $message['locale']) {
                     if (array_key_exists($message['message'], $this->messages)) {
                         $this->messages[$message['message']]['count'] ++;
                     } else {
@@ -143,7 +143,7 @@ trait MessageTrait
                             'count' => 1
                         );
                     }
-                }
+//                }
             } catch (\Exception $ex) {}
         }
         
