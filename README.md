@@ -29,7 +29,7 @@ Options:
  dump-messages |  Should the messages be dumped in the console | false 
  no-backup | Should backup not be done | false
  clean | Should clean not found messages. But we will ignore next files: 'validation', 'auth', 'passwords', 'pagination' | false 
- prefix | Override the default prefix. | __,@lang,trans_choice,@choice,__ab,trans_choice_ab 
+ prefix | Override the default prefix. | __,@lang,trans_choice,@choice,__ab,@lang_ab,trans_choice_ab,@choice_ab 
 
 ### Update Untracked Command:
 Update translations with untracked messages.
@@ -38,7 +38,7 @@ If you want to be able to tracked untracked messages please use `__ab` and `tran
 
 What is **untracked** message: `{{ __($message) }}` or `{{ trans_choice($message, 5, ['value' => 5]) }}`.
 
-When you use `__ab` or `trans_choice_ab` function they will work the same way as `__` and `trans_choice` plus loging all the messages to the special log file.
+When you use `__ab`, `trans_choice_ab`, `@lang_ab` or `@choice_ab` function they will work the same way as `__`, `trans_choice``@lang` or `@choice`  plus loging all messages to the special log file.
 ```sh
 $ php artisan translation:untracked {locale} {--force} {--dump-messages}
 ```
@@ -72,7 +72,7 @@ Arguments:
 
  Name | Description | Default
 :---------|:----------|:----------
- prefix | Override the default prefix. | __,@lang,trans_choice,@choice,__ab,trans_choice_ab
+ prefix | Override the default prefix. | __,@lang,trans_choice,@choice,__ab,@lang_ab,trans_choice_ab,@choice_ab
 
 -------
 

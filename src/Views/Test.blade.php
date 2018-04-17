@@ -1,35 +1,39 @@
-{{ trans_choice('{1} :value minute ago|[2,*] :value minutes ago', 5, ['value' => 5]) }}<br />
+<p>{{ trans_choice('{1} :value minute ago|[2,*] :value minutes ago', 5, ['value' => 5]) }}</p>
 
-{{ trans_choice(  '{1} :value day ago|[2,*] :value days ago'   , 5, ['value' => 5]) }}<br />
+<p>{{ trans_choice(  '{1} :value day ago|[2,*] :value days ago'   , 5, ['value' => 5]) }}</p>
 
-{{ __('Welcome, :name', ['name' => 'dayle']) }}<br />
+<p>{{ __('Welcome, :name', ['name' => 'dayle']) }}</p>
 
-@lang('Hi, :name', ['name' => 'dayle'])<br />
+<p>@lang('Hi, :name', ['name' => 'dayle'])</p>
 
-@lang("You'r welcome :name", ['name' => 'dayle'])<br />
+<p>@lang("You'r welcome :name", ['name' => 'dayle'])</p>
 
-{{ __("You'r welcome") }}<br />
+<p>{{ __("You'r welcome") }}</p>
 
-{{ __('New Users') }}<br />
+<p>{{ __('New Users') }}</p>
 
-@lang('Table View: User')<br />
+<p>@lang('Table View: User')</p>
 
-@choice('{1} :value minute ago|[2,*] :value minutes ago', 5, ['value' => 5])<br />
+<p>@choice('{1} :value minute ago|[2,*] :value minutes ago', 5, ['value' => 5])</p>
 
-@lang('admin.Table View: User')<br />
+<p>@lang('admin.Table View: User')</p>
 
-@lang('user.Table View: User')<br />
+<p>@lang('user.Table View: User')</p>
 
-@lang('member.Table View: User')<br />
+<p>@lang('member.Table View: User')</p>
 
-@lang('member.Table View: Members')<br />
+<p>@lang('member.Table View: Members')</p>
 
-@lang('member.Table View: Members Hello')<br />
+<p>@lang('member.Table View: Members Hello')</p>
 
-@lang('admin.Table View: User1')<br />
+<p>@lang('admin.Table View: User1')</p>
 
-@lang('user.Table View: User1')<br />
+<p>@lang('user.Table View: User1')</p>
 
-@lang('member.Table View: User1')<br />
+<p>@lang('member.Table View: User1')</p>
 
-@lang('validation.Table View: User1')<br />
+<p>@lang('validation.Table View: User1')</p>
+
+<p>@lang_ab('Hi, :name', ['name' => 'dayle'])</p>
+                    
+<p>@choice_ab('{1} :value minute ago|[2,*] :value minutes ago', 5, ['value' => 5])</p>

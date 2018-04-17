@@ -4,6 +4,7 @@ namespace Translator;
 
 use Illuminate\Support\ServiceProvider;
 use Translator\Validation\Rules\LocaleValidationRule;
+use Illuminate\Support\Facades\Blade;
 
 
 /**
@@ -28,6 +29,8 @@ class TranslatorServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->setConfig();
+        
+        $this->setBladeDirectives();
         
         if ($this->app->runningInConsole()) {
             $this->commands([
@@ -63,6 +66,20 @@ class TranslatorServiceProvider extends ServiceProvider
             }
             
             return false;
+        });
+    }
+    
+    /**
+     * @link https://laravel.com/docs/5.5/blade#extending-blade
+     */
+    private function setBladeDirectives() : void
+    {
+        Blade::directive('lang_ab', function ($expression) {
+            return "<?php echo __ab({$expression}); ?>";
+        });
+        
+        Blade::directive('choice_ab', function ($expression) {
+            return "<?php echo trans_choice_ab({$expression}); ?>";
         });
     }
 }

@@ -30,7 +30,7 @@ class TranslationDiffCommand extends Command
                                 
                                 {path=views : Directory where to load the messages, defaults to views folder}
                                                                 
-                                {--prefix=__,@lang,trans_choice,@choice,__ab,trans_choice_ab : Override the default prefix. Default "__,@lang,trans_choice,@choice,__ab,trans_choice_ab"}
+                                {--prefix=__,@lang,trans_choice,@choice,__ab,@lang_ab,trans_choice_ab,@choice_ab : Override the default prefix. Default "__,@lang,trans_choice,@choice,__ab,@lang_ab,trans_choice_ab,@choice_ab"}
                            ';
 
     /**
