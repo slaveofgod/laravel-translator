@@ -38,6 +38,9 @@
         }
     },
     "scripts": {
+        "post-autoload-dump": [
+            "@php artisan vendor:publish --tag=translator --force"
+        ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=translator --force"
         ],
