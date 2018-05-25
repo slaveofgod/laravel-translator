@@ -28,10 +28,13 @@ class TranslatorServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // Config
         $this->setConfig();
         
+        // Laravel Blade Directives
         $this->setBladeDirectives();
         
+        // Commands
         if ($this->app->runningInConsole()) {
             $this->commands([
                 \Translator\Console\TranslationUpdateCommand::class,
@@ -41,6 +44,18 @@ class TranslatorServiceProvider extends ServiceProvider
             
             $this->validationRules();
         }
+        
+        // Views
+        $this->loadViewsFrom(__DIR__.'/Resources/views/Translator', 'Translator');
+        
+        // Routes
+        $this->loadRoutesFrom(__DIR__.'/Resources/routes/web.php');
+        
+        // Public Assets
+        // php artisan vendor:publish --tag=translator --force
+        $this->publishes([
+            __DIR__.'/Resources/public/skins' => public_path('vendor/translator'),
+        ], 'translator');
     }
     
     /**
