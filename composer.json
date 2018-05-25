@@ -39,10 +39,10 @@
     },
     "scripts": {
         "post-update-cmd": [
-            "php artisan vendor:publish --tag=translator --force"
+            "@php php artisan vendor:publish --tag=translator --force"
         ],
         "post-install-cmd": [
-            "php artisan vendor:publish --tag=translator --force"
+            "@php php artisan vendor:publish --tag=translator --force"
         ]
     }
 }
