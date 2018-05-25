@@ -29,7 +29,7 @@ trait ResourceTrait
      */
     private function addResource(string $path, string $format) : ResourceFacade
     {
-        $resource = new ResourceFacade($path, $format, $this->backupName);
+        $resource = new ResourceFacade($this->resource_path, $path, $format, $this->backupName);
         $this->resources[] = $resource;
         
         return $resource;
@@ -44,7 +44,7 @@ trait ResourceTrait
          * resources/lang/{$locale}.json
          */
         try {
-            $path = resource_path('lang/' . $this->locale . '.json');
+            $path = $this->resource_path . '/lang/' . $this->locale . '.json';
             $content = (new Filesystem)->get($path);
             
             $this->addResource($path, 'json');
@@ -55,7 +55,7 @@ trait ResourceTrait
          * resources/lang/{$locale}/*.php
          */
         try {
-            $path = resource_path('lang/' . $this->locale . '/');
+            $path = $this->resource_path . '/lang/' . $this->locale . '/';
             $finder = new Finder();
             $finder->files()->name('*.php')->in($path);
             foreach ($finder as $file) {

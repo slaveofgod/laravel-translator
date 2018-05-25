@@ -49,6 +49,7 @@ class TranslatorServiceProvider extends ServiceProvider
     private function setConfig() : void
     {
         \Config::set('translator_log', 'translator.log');
+        \Config::set('resource_path', __DIR__ . '/Resources');
     }
     
     /**

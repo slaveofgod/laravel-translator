@@ -26,7 +26,13 @@ class TranslatorService
      *
      * @var string
      */
-    private $path;
+    private $resource_path;
+
+    /**
+     *
+     * @var string
+     */
+    private $template_path;
     
     /**
      *
@@ -57,16 +63,27 @@ class TranslatorService
     /**
      * 
      * @param string $locale
-     * @param string $path
+     * @param string $resource_path
+     * @param string $template_path
      * @param string $prefixes
+     * @param bool $dev
      * @param string $backupName
      * @param string $extract
      */
-    public function __construct(string $locale, string $path = null, string $prefixes = null, string $backupName = null, string $extract = 'view')
-    {
+    public function __construct(
+        string $locale,
+        string $resource_path = null,
+        string $template_path = null,
+        string $prefixes = null,
+        bool $dev = false,
+        string $backupName = null,
+        string $extract = 'view'
+    ) {
         $this->locale = $locale;
-        $this->path = $path;
+        $this->resource_path = $resource_path;
+        $this->template_path = $template_path;
         $this->prefixes = $prefixes;
+        $this->dev = $dev;
         $this->backupName = (null !== $backupName) ? $backupName : date('Y-m-d\TH:i:s');
         
         $this->loadResources();

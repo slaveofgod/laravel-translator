@@ -14,6 +14,12 @@ class ResourceFacade
      *
      * @var string
      */
+    private $resource_path;
+    
+    /**
+     *
+     * @var string
+     */
     private $path;
     
     /**
@@ -50,12 +56,14 @@ class ResourceFacade
     
     /**
      * 
-     * @param string $path
-     * @param string $format
-     * @param string $backupName
+     * @param type $resource_path
+     * @param type $path
+     * @param type $format
+     * @param type $backupName
      */
-    public function __construct($path, $format, $backupName)
+    public function __construct($resource_path, $path, $format, $backupName)
     {
+        $this->resource_path = $resource_path;
         $this->path = $path;
         $this->format = $format;
         $this->backupName = $backupName;
@@ -128,7 +136,7 @@ class ResourceFacade
      */
     public function getRelativePathname()
     {
-        return str_replace(resource_path() . '/', "", $this->path);
+        return str_replace($this->resource_path . '/', "", $this->path);
     }
     
     /**
@@ -137,7 +145,7 @@ class ResourceFacade
      */
     public function getLocalPathname()
     {
-        return str_replace(resource_path() . '/lang/', "", $this->path);
+        return str_replace($this->resource_path . '/lang/', "", $this->path);
     }
     
     /**
@@ -228,7 +236,7 @@ class ResourceFacade
      */
     private function backup() : void
     {
-        $filePath = resource_path('lang/backup/' . $this->backupName . '/' . $this->getLocalPathname());
+        $filePath = $this->resource_path . '/lang/backup/' . $this->backupName . '/' . $this->getLocalPathname();
         if (false === \File::isDirectory(dirname($filePath))) {
             \File::makeDirectory(dirname($filePath), 0755, true);
         }

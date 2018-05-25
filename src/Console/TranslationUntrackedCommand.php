@@ -33,7 +33,9 @@ class TranslationUntrackedCommand extends Command
                                 {--dump-messages : Should the messages be dumped in the console}
                                 
                                 {--no-backup : Should backup not be done}
-                           ';
+                                
+                                {--dev : Development environment}
+                            ';
 
     /**
      * The console command description.
@@ -79,17 +81,23 @@ class TranslationUntrackedCommand extends Command
             return 1;
         }
         
-//        // Define Root Paths
-//        $root_path = resource_path($this->argument('path'));
-//        if (!is_dir($root_path)) {
-//            
-//            $this->error(sprintf('"%s" is neither a file nor a directory of resources.', $this->argument('path')));
-//            
-//            return 1;
-//        }
+        // Define resource path
+        if ($this->option('dev')) {
+            $resource_path = \Config::get('resource_path');
+        } else {
+            $resource_path = resource_path();
+        }
         
         $this->alert('Translation Messages Extractor and Dumper');
-        $this->translator = new TranslatorService($this->argument('locale'), null, null, null, 'untracked');
+        $this->translator = new TranslatorService(
+            $this->argument('locale'),
+            $resource_path,
+            null,
+            null,
+            $this->option('dev'),
+            null,
+            'untracked'
+        );
 
         $this->comment('Parsing templates...');
         $this->line('');

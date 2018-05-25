@@ -31,7 +31,9 @@ class TranslationDiffCommand extends Command
                                 {path=views : Directory where to load the messages, defaults to views folder}
                                                                 
                                 {--prefix=__,@lang,trans_choice,@choice,__ab,@lang_ab,trans_choice_ab,@choice_ab : Override the default prefix. Default "__,@lang,trans_choice,@choice,__ab,@lang_ab,trans_choice_ab,@choice_ab"}
-                           ';
+                                
+                                {--dev : Development environment}
+                            ';
 
     /**
      * The console command description.
@@ -70,17 +72,29 @@ class TranslationDiffCommand extends Command
             return 1;
         }
         
-        // Define Root Paths
-        $root_path = resource_path($this->argument('path'));
-        if (!is_dir($root_path)) {
-            
+        // Define resource path
+        if ($this->option('dev')) {
+            $resource_path = \Config::get('resource_path');
+        } else {
+            $resource_path = resource_path();
+        }
+        
+        // Define template path
+        $template_path = $resource_path . '/' . $this->argument('path');
+        if (!is_dir($template_path)) {
             $this->error(sprintf('"%s" is neither a file nor a directory of resources.', $this->argument('path')));
             
             return 1;
         }
         
         $this->alert('Translation Messages Extractor');
-        $this->translator = new TranslatorService($this->argument('locale'), $root_path, $this->option('prefix'));
+        $this->translator = new TranslatorService(
+            $this->argument('locale'),
+            $resource_path,
+            $template_path,
+            $this->option('prefix'),
+            $this->option('dev')
+        );
 
         $this->comment('Parsing templates...');
         $this->line('');

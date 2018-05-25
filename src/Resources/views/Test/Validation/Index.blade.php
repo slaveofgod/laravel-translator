@@ -1,0 +1,1 @@
+<p>@lang('validation.Table View: User1')</p>

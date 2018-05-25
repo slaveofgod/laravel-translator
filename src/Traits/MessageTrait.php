@@ -89,9 +89,9 @@ trait MessageTrait
     public function addNewMessages() : void
     {
         foreach ($this->getNewMessages() as $message) {
-            $filePath = resource_path('lang/' . $this->locale . '.json');
+            $filePath = $this->resource_path . '/lang/' . $this->locale . '.json';
             if (preg_match('/(^[a-zA-Z0-9]+)\.([\S].*)/', $message, $match)) {
-                $filePath = resource_path('lang/' . $this->locale . '/' . $match[1] . '.php');
+                $filePath = $this->resource_path . '/lang/' . $this->locale . '/' . $match[1] . '.php';
                 $message = $match[2];
             }
             
@@ -107,7 +107,7 @@ trait MessageTrait
     private function extractViewMessages() : void
     {
         $finder = new Finder();
-        $finder->files()->name('*.blade.php')->in($this->path);
+        $finder->files()->name('*.blade.php')->in($this->template_path);
         foreach ($finder as $file) {
             $contents = $file->getContents();
             $prefixes = explode(',', $this->prefixes);
@@ -134,7 +134,7 @@ trait MessageTrait
         foreach ($contents as $content) {
             try {
                 $message = json_decode($content, true);
-//                if ($this->locale === $message['locale']) {
+                if ($this->locale === $message['locale']) {
                     if (array_key_exists($message['message'], $this->messages)) {
                         $this->messages[$message['message']]['count'] ++;
                     } else {
@@ -143,7 +143,7 @@ trait MessageTrait
                             'count' => 1
                         );
                     }
-//                }
+                }
             } catch (\Exception $ex) {}
         }
         
