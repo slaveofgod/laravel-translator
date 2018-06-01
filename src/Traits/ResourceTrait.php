@@ -25,6 +25,7 @@ trait ResourceTrait
      * 
      * @param string $path
      * @param string $format
+     * 
      * @return ResourceFacade
      */
     private function addResource(string $path, string $format) : ResourceFacade
@@ -67,6 +68,7 @@ trait ResourceTrait
     /**
      * 
      * @param string $filePath
+     * 
      * @return ResourceFacade
      */
     private function getOrLoadResource(string $filePath) : ResourceFacade
@@ -82,6 +84,7 @@ trait ResourceTrait
     /**
      * 
      * @param string $filePath
+     * 
      * @return ResourceFacade
      */
     private function findResourceByFilePath(string $filePath)

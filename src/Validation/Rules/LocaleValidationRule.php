@@ -12,6 +12,7 @@ class LocaleValidationRule implements Rule
      *
      * @param  string  $attribute
      * @param  mixed  $value
+     * 
      * @return bool
      */
     public function passes($attribute, $value)
@@ -35,6 +36,6 @@ class LocaleValidationRule implements Rule
      */
     public function message()
     {
-        return trans('validation.locale');
+        return trans('translator::validation.locale');
     }
 }

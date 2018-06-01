@@ -9,6 +9,7 @@ if (! function_exists('__ab')) {
      * @param  string  $key
      * @param  array  $replace
      * @param  string  $locale
+     * 
      * @return string|array|null
      */
     function __ab($key, $replace = [], $locale = null)
@@ -45,6 +46,7 @@ if (! function_exists('trans_choice_ab')) {
      * @param  int|array|\Countable  $number
      * @param  array   $replace
      * @param  string  $locale
+     * 
      * @return string
      */
     function trans_choice_ab($key, $number, array $replace = [], $locale = null)
@@ -62,5 +64,24 @@ if (! function_exists('trans_choice_ab')) {
             );
         
         return trans_choice($key, $number, $replace, $locale);
+    }
+}
+
+
+if (! function_exists('locale_country')) {
+    /**
+     * Get country by locale.
+     *
+     * @param  string  $locale
+     * 
+     * @return string
+     */
+    function locale_country(string $locale)
+    {
+        $data = [
+            'en' => 'gb'
+        ];
+
+        return isset($data[$locale]) ?  $data[$locale] : $locale;
     }
 }

@@ -23,6 +23,7 @@ trait MessageTrait
     /**
      * 
      * @param string $key
+     * 
      * @return mixed
      */
     public function getMessage(string $key)
@@ -39,6 +40,7 @@ trait MessageTrait
     /**
      * 
      * @param string $key
+     * 
      * @return boolean
      */
     public function hasMessage(string $key) : bool
@@ -49,6 +51,7 @@ trait MessageTrait
     /**
      * 
      * @param string $message
+     * 
      * @return string
      */
     private function cleanMessage(string $message) : string
@@ -63,6 +66,7 @@ trait MessageTrait
     /**
      * 
      * @param boolean $tableView
+     * 
      * @return array
      */
     public function getNewMessages(bool $tableView = false) : array
@@ -84,9 +88,9 @@ trait MessageTrait
     }
     
     /**
-     * 
+     * @return void
      */
-    public function addNewMessages() : void
+    public function addNewMessages()
     {
         foreach ($this->getNewMessages() as $message) {
             $filePath = $this->resource_path . '/lang/' . $this->locale . '.json';
@@ -102,9 +106,9 @@ trait MessageTrait
     }
     
     /**
-     * 
+     * @return void
      */
-    private function extractViewMessages() : void
+    private function extractViewMessages()
     {
         $finder = new Finder();
         $finder->files()->name('*.blade.php')->in($this->template_path);
@@ -122,9 +126,9 @@ trait MessageTrait
     }
     
     /**
-     * 
+     * @return void
      */
-    private function extractUntrackedMessages() : void
+    private function extractUntrackedMessages()
     {
         $contents = [];
         try {
@@ -156,8 +160,10 @@ trait MessageTrait
      * 
      * @param string $contents
      * @param string $prefix
+     * 
+     * @return void
      */
-    private function extractMessagesFromContents(string $contents, string $prefix) : void
+    private function extractMessagesFromContents(string $contents, string $prefix)
     {
         $this->extractMessagesFromContentsByPattern('/' . $prefix . '\(\s*\'([^\']+)\'[^)]*\)/i', $contents);
         $this->extractMessagesFromContentsByPattern('/' . $prefix . '\(\s*\"([^"]+)\"[^)]*\)/i', $contents);
@@ -167,8 +173,10 @@ trait MessageTrait
      * 
      * @param string $pattern
      * @param string $contents
+     * 
+     * @return void
      */
-    private function extractMessagesFromContentsByPattern(string $pattern, string $contents) : void
+    private function extractMessagesFromContentsByPattern(string $pattern, string $contents)
     {
         preg_match_all($pattern, $contents, $matches, PREG_SET_ORDER, 0);
         
@@ -191,6 +199,7 @@ trait MessageTrait
     /**
      * 
      * @param array $data
+     * 
      * @return array
      */
     private function tableView(array $data) : array

@@ -46,7 +46,7 @@ class TranslatorServiceProvider extends ServiceProvider
         }
         
         // Views
-        $this->loadViewsFrom(__DIR__.'/Resources/views/Translator', 'Translator');
+        $this->loadViewsFrom(__DIR__.'/Resources/views', 'Translator');
         
         // Routes
         $this->loadRoutesFrom(__DIR__.'/Resources/routes/web.php');
@@ -56,21 +56,24 @@ class TranslatorServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/Resources/public/skins' => public_path('vendor/translator'),
         ], 'translator');
+        
+        // Translations
+        $this->loadTranslationsFrom(__DIR__.'/Resources/lang', 'translator');
     }
     
     /**
-     * 
+     * @return void
      */
-    private function setConfig() : void
+    private function setConfig()
     {
         \Config::set('translator_log', 'translator.log');
-        \Config::set('resource_path', __DIR__ . '/Resources');
+        \Config::set('resource_path', __DIR__ . '/Resources/test');
     }
     
     /**
-     * 
+     * @return void
      */
-    private function validationRules() : void
+    private function validationRules()
     {
         \Validator::extend('locale', function($attribute, $value, $parameters, $validator) {
 
@@ -87,8 +90,10 @@ class TranslatorServiceProvider extends ServiceProvider
     
     /**
      * @link https://laravel.com/docs/5.5/blade#extending-blade
+     * 
+     * @return void
      */
-    private function setBladeDirectives() : void
+    private function setBladeDirectives()
     {
         Blade::directive('lang_ab', function ($expression) {
             return "<?php echo __ab({$expression}); ?>";

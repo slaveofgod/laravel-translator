@@ -178,8 +178,10 @@ class ResourceFacade
      * 
      * @param string $message
      * @param string $value
+     * 
+     * @return void
      */
-    public function addMessage($message, $value = "") : void
+    public function addMessage($message, $value = "")
     {
         $this->messages[$message] = $value;
         
@@ -191,10 +193,31 @@ class ResourceFacade
     /**
      * 
      * @param string $message
+     * @param string $value
+     * 
+     * @return bool
      */
-    public function deleteMessage($message) : void
+    public function updateMessage($message, $value = "")
     {
-        if (isset($this->messages[$message])) {
+        if (array_key_exists($message, $this->messages)) {
+            $this->messages[$message] = $value;
+            $this->isModified = true;
+            
+            return true;
+        }
+        
+        return false;
+    }
+    
+    /**
+     * 
+     * @param string $message
+     * 
+     * @return void
+     */
+    public function deleteMessage($message)
+    {
+        if (array_key_exists($message, $this->messages)) {
             unset($this->messages[$message]);
             $this->isModified = true;
         }
@@ -202,9 +225,31 @@ class ResourceFacade
     
     /**
      * 
-     * @param boolean $noBackup
+     * @param string $hesh
+     * @return array | null
      */
-    public function save($noBackup = false) : void
+    public function getMessageByHesh($hesh)
+    {
+        foreach ($this->messages as $key => $value) {
+            if ($hesh === md5($key)) {
+                return [
+                    'hesh' => md5($this->getRelativePathname()) . ',' . md5($key),
+                    'original' => $key,
+                    'translation' => $value
+                ];
+            }
+        }
+        
+        return null;
+    }
+    
+    /**
+     * 
+     * @param boolean $noBackup
+     * 
+     * @return void
+     */
+    public function save($noBackup = false)
     {
         if (
             true === $this->isModified
@@ -232,9 +277,9 @@ class ResourceFacade
     }
     
     /**
-     * 
+     * @return void
      */
-    private function backup() : void
+    private function backup()
     {
         $filePath = $this->resource_path . '/lang/backup/' . $this->backupName . '/' . $this->getLocalPathname();
         if (false === \File::isDirectory(dirname($filePath))) {
@@ -268,5 +313,21 @@ class ResourceFacade
     public function getNewMessages()
     {
         return $this->newMessages;
+    }
+    
+    /**
+     * 
+     * @return array
+     */
+    public function getUntranslatedMessages()
+    {
+        $untranslated = [];
+        foreach ($this->messages as $key => $value) {
+            if (!$value) {
+                $untranslated[] = $key;
+            }
+        }
+        
+        return $untranslated;
     }
 }

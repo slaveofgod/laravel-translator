@@ -95,9 +95,9 @@ class TranslatorService
     }
     
     /**
-     * 
+     * @return void
      */
-    public function clean() : void
+    public function clean()
     {
         foreach ($this->resources as $resource) {
             
@@ -114,11 +114,58 @@ class TranslatorService
     /**
      * 
      * @param boolean $noBackup
+     * 
+     * @return void
      */
-    public function save(bool $noBackup = false) : void
+    public function save(bool $noBackup = false)
     {
         foreach ($this->resources as $resource) {
             $resource->save($noBackup);
         }
+    }
+    
+    /**
+     * 
+     * @return integer
+     */
+    public function getUntranslatedMessagesCount()
+    {
+        $count = 0;
+        foreach ($this->resources as $resource) {
+            $count += count($resource->getUntranslatedMessages());
+        }
+        
+        return $count;
+    }
+    
+    /**
+     * 
+     * @return integer
+     */
+    public function getMessagesCount()
+    {
+        $count = 0;
+        foreach ($this->resources as $resource) {
+            $count += count($resource->getMessages());
+        }
+        
+        return $count;
+    }
+    
+    /**
+     * 
+     * @param string $hesh
+     * 
+     * @return @return ResourceFacade
+     */
+    public function getResourceByHesh($hesh)
+    {
+        foreach ($this->resources as $resource) {
+            if ($hesh === md5($resource->getRelativePathname())) {
+                return $resource;
+            }
+        }
+        
+        return null;
     }
 }

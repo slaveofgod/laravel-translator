@@ -1,7 +1,16 @@
 {
     "name": "alexeybob/laravel-translator",
-    "description": "Laravel artisan command that extracting translation contents and updating translation files automatically",
+    "description": "PHP Laravel artisan command that extracting translation contents and updating translation files automatically",
     "type": "library",
+    "keywords": [
+        "laravel-translator",
+        "laravel",
+        "translator",
+        "translation",
+        "localization",
+	"command"
+    ],
+    "homepage": "https://github.com/alexeybob/laravel-translator",
     "license": "MIT",
     "authors": [
         {

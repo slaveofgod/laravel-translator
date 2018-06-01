@@ -6,6 +6,11 @@ The most time-consuming tasks when translating an application is to extract all 
 
 ```sh
 $ composer require alexeybob/laravel-translator dev-master
+$ php artisan vendor:publish --tag=translator --force
+
+$ HTTPDUSER=$(ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1)
+$ sudo setfacl -dR -m u:"$HTTPDUSER":rwX -m u:$(whoami):rwX resources/lang
+$ sudo setfacl -R -m u:"$HTTPDUSER":rwX -m u:$(whoami):rwX resources/lang
 ```
 
 ## Commands:
