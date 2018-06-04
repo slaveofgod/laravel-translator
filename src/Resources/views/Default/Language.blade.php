@@ -1,9 +1,9 @@
-@extends('Translator::layout')
+@extends('ABTranslator::layout')
 
 @section('translator_content')
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ route('translator_index') }}">{{ trans('translator::messages.dashboard') }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('translator_index') }}">{{ trans('abtranslator::messages.dashboard') }}</a></li>
         <li class="breadcrumb-item active" aria-current="page">{{ $title }}</li>
       </ol>
     </nav>
@@ -22,8 +22,8 @@
                         <thead>
                             <tr>
                                 <th></th>
-                                <th>@lang('translator::messages.original_messages')</th>
-                                <th>@lang('translator::messages.translation_messages')</th>
+                                <th>@lang('abtranslator::messages.original_messages')</th>
+                                <th>@lang('abtranslator::messages.translation_messages')</th>
                             </tr>
                         </thead>
                     </table>

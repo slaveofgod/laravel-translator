@@ -1,9 +1,10 @@
 <?php
 
-namespace Translator\Console;
+namespace AB\Laravel\Translator\Console;
 
 use Illuminate\Console\Command;
-use Translator\Services\TranslatorService;
+use AB\Laravel\Translator\Services\TranslatorService;
+use AB\Laravel\Translator\Rules\Locale;
 
 
 /**
@@ -60,12 +61,11 @@ class TranslationDiffCommand extends Command
     public function handle()
     {
         // validate locale
-        $validator = \Validator::make(['locale' => $this->argument('locale')], ['locale' => 'required|locale']);
+        $validator = \Validator::make(['locale' => $this->argument('locale')], ['locale' => ['required', new Locale]]);
         if ($validator->fails()) {
-            $this->error('Locale Errors:');
             foreach ($validator->errors()->getMessages() as $key => $errors) {
                 foreach ($errors as $error) {
-                    $this->error('  • ' . $key . ': ' .  $error);
+                    $this->error($error);
                 }
             }
             

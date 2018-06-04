@@ -12,32 +12,32 @@
         <title>SB Admin 2 - Bootstrap Admin Theme</title>
 
         <!-- Bootstrap Core CSS -->
-        <link href="/vendor/translator/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/vendor/abtranslator/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- MetisMenu CSS -->
-        <link href="/vendor/translator/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+        <link href="/vendor/abtranslator/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
 
         <!-- DataTables CSS -->
-        <link rel="stylesheet" type="text/css" href="/vendor/translator/datatables/datatables.min.css"/>
-        <!--<link href="/vendor/translator/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">-->
+        <link rel="stylesheet" type="text/css" href="/vendor/abtranslator/datatables/datatables.min.css"/>
+        <!--<link href="/vendor/abtranslator/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">-->
 
         <!-- DataTables Responsive CSS -->
-        <!--<link href="/vendor/translator/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">-->
+        <!--<link href="/vendor/abtranslator/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">-->
         
         <!-- Custom CSS -->
-        <link href="/vendor/translator/dist/css/sb-admin-2.css" rel="stylesheet">
+        <link href="/vendor/abtranslator/dist/css/sb-admin-2.css" rel="stylesheet">
 
         <!-- Morris Charts CSS -->
-        <link href="/vendor/translator/vendor/morrisjs/morris.css" rel="stylesheet">
+        <link href="/vendor/abtranslator/vendor/morrisjs/morris.css" rel="stylesheet">
 
         <!-- Custom Fonts -->
-        <link href="/vendor/translator/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="/vendor/abtranslator/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
         <!-- Flag Icon CSS -->
-        <link href="/vendor/translator/vendor/flag-icon-css/css/flag-icon.min.css" rel="stylesheet" type="text/css">
+        <link href="/vendor/abtranslator/vendor/flag-icon-css/css/flag-icon.min.css" rel="stylesheet" type="text/css">
 
         <!-- Common CSS -->
-        <link href="/vendor/translator/css/common.css" rel="stylesheet">
+        <link href="/vendor/abtranslator/css/common.css" rel="stylesheet">
         
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -49,7 +49,7 @@
     </head>
 
     <body>
-        @inject('appService', 'Translator\Services\AppService')
+        @inject('appService', 'AB\Laravel\Translator\Services\AppService')
         
         <div id="wrapper">
             
@@ -66,10 +66,10 @@
                 </div>
                 <!-- /.navbar-header -->
 
-                <!--@ include('Translator::Common.NavbarHeader')-->
+                <!--@ include('ABTranslator::Common.NavbarHeader')-->
                 <!-- /.navbar-top-links -->
 
-                @include('Translator::Common.NavbarSidebar')
+                @include('ABTranslator::Common.NavbarSidebar')
                 <!-- /.navbar-static-side -->
             </nav>
 
@@ -89,28 +89,28 @@
         <!-- /#wrapper -->
 
         <!-- jQuery -->
-        <script src="/vendor/translator/vendor/jquery/jquery.min.js"></script>
+        <script src="/vendor/abtranslator/vendor/jquery/jquery.min.js"></script>
 
         <!-- Bootstrap Core JavaScript -->
-        <script src="/vendor/translator/vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/vendor/abtranslator/vendor/bootstrap/js/bootstrap.min.js"></script>
 
         <!-- Metis Menu Plugin JavaScript -->
-        <script src="/vendor/translator/vendor/metisMenu/metisMenu.min.js"></script>
+        <script src="/vendor/abtranslator/vendor/metisMenu/metisMenu.min.js"></script>
 
         <!-- Morris Charts JavaScript -->
-        <script src="/vendor/translator/vendor/raphael/raphael.min.js"></script>
-        <script src="/vendor/translator/vendor/morrisjs/morris.min.js"></script>
-        <script src="/vendor/translator/data/morris-data.js"></script>
+        <script src="/vendor/abtranslator/vendor/raphael/raphael.min.js"></script>
+        <script src="/vendor/abtranslator/vendor/morrisjs/morris.min.js"></script>
+        <script src="/vendor/abtranslator/data/morris-data.js"></script>
         
         <!-- DataTables JavaScript -->
-        <script src="/vendor/translator/datatables/datatables.min.js"></script>
-        <!--<script src="/vendor/translator/vendor/datatables/js/jquery.dataTables.min.js"></script>-->
-        <!--<script src="/vendor/translator/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>-->
-        <!--<script src="/vendor/translator/vendor/datatables-responsive/dataTables.responsive.js"></script>-->
+        <script src="/vendor/abtranslator/datatables/datatables.min.js"></script>
+        <!--<script src="/vendor/abtranslator/vendor/datatables/js/jquery.dataTables.min.js"></script>-->
+        <!--<script src="/vendor/abtranslator/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>-->
+        <!--<script src="/vendor/abtranslator/vendor/datatables-responsive/dataTables.responsive.js"></script>-->
         
 
         <!-- Custom Theme JavaScript -->
-        <script src="/vendor/translator/dist/js/sb-admin-2.js"></script>
+        <script src="/vendor/abtranslator/dist/js/sb-admin-2.js"></script>
 
         @stack('translator_javascripts')
     </body>

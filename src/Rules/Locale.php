@@ -1,11 +1,11 @@
 <?php
 
-namespace Translator\Validation\Rules;
+namespace AB\Laravel\Translator\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Filesystem\Filesystem;
 
-class LocaleValidationRule implements Rule
+class Locale implements Rule
 {
     /**
      * Determine if the validation rule passes.
@@ -18,15 +18,13 @@ class LocaleValidationRule implements Rule
     public function passes($attribute, $value)
     {
         try {
-            $path = __DIR__ . '/../../Storage/locales.json';
+            $path = __DIR__ . '/../Storage/locales.json';
             $content = json_decode((new Filesystem)->get($path), true);
             
-            return (false === array_key_exists($value, $content));
+            return (true === array_key_exists($value, $content));
         } catch (\Exception $ex) {
             return false;
         }
-        
-        return true;
     }
 
     /**
@@ -36,6 +34,6 @@ class LocaleValidationRule implements Rule
      */
     public function message()
     {
-        return trans('translator::validation.locale');
+        return trans('abtranslator::validation.locale');
     }
 }

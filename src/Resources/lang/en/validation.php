@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'locale' => 'Invalid locale'
+    'locale' => 'The ":attribute" must be existing language.'
 ];

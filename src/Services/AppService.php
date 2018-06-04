@@ -1,6 +1,6 @@
 <?php
 
-namespace Translator\Services;
+namespace AB\Laravel\Translator\Services;
 
 use Symfony\Component\Finder\Finder;
 

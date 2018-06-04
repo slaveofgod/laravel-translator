@@ -1,6 +1,6 @@
 <?php
 
-namespace Translator\Facades;
+namespace AB\Laravel\Translator\Facades;
 
 use Illuminate\Filesystem\Filesystem;
 

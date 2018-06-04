@@ -3,7 +3,7 @@
 namespace AB\Laravel\Translator;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
-use Translator\Validation\Rules\LocaleValidationRule;
+use AB\Laravel\Translator\Validation\Rules\LocaleValidationRule;
 use Illuminate\Support\Facades\Blade;
 
 
@@ -37,28 +37,28 @@ class ServiceProvider extends BaseServiceProvider
         // Commands
         if ($this->app->runningInConsole()) {
             $this->commands([
-                \Translator\Console\TranslationUpdateCommand::class,
-                \Translator\Console\TranslationDiffCommand::class,
-                \Translator\Console\TranslationUntrackedCommand::class,
+                \AB\Laravel\Translator\Console\TranslationUpdateCommand::class,
+                \AB\Laravel\Translator\Console\TranslationDiffCommand::class,
+                \AB\Laravel\Translator\Console\TranslationUntrackedCommand::class,
             ]);
             
-            $this->validationRules();
+//            $this->validationRules();
         }
         
         // Views
-        $this->loadViewsFrom(__DIR__.'/Resources/views', 'Translator');
+        $this->loadViewsFrom(__DIR__.'/Resources/views', 'ABTranslator');
         
         // Routes
         $this->loadRoutesFrom(__DIR__.'/Resources/routes/web.php');
         
         // Public Assets
-        // php artisan vendor:publish --tag=translator --force
+        // php artisan vendor:publish --tag=abtranslator --force
         $this->publishes([
-            __DIR__.'/Resources/public/skins' => public_path('vendor/translator'),
-        ], 'translator');
+            __DIR__.'/Resources/public/skins' => public_path('vendor/abtranslator'),
+        ], 'abtranslator');
         
         // Translations
-        $this->loadTranslationsFrom(__DIR__.'/Resources/lang', 'translator');
+        $this->loadTranslationsFrom(__DIR__.'/Resources/lang', 'abtranslator');
     }
     
     /**
@@ -70,23 +70,23 @@ class ServiceProvider extends BaseServiceProvider
         \Config::set('resource_path', __DIR__ . '/Resources/test');
     }
     
-    /**
-     * @return void
-     */
-    private function validationRules()
-    {
-        \Validator::extend('locale', function($attribute, $value, $parameters, $validator) {
-
-            $rule = new LocaleValidationRule();
-            
-            if (false === $rule->passes($attribute, $value)) {
-                
-                return $rule->message();
-            }
-            
-            return false;
-        });
-    }
+//    /**
+//     * @return void
+//     */
+//    private function validationRules()
+//    {
+//        \Validator::extend('locale', function($attribute, $value, $parameters, $validator) {
+//
+//            $rule = new LocaleValidationRule();
+//
+//            if (true === $rule->passes($attribute, $value)) {
+//                
+//                return true;
+//            }
+//            
+//            return false;
+//        });
+//    }
     
     /**
      * @link https://laravel.com/docs/5.5/blade#extending-blade

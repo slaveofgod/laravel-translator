@@ -1,9 +1,9 @@
 <?php
 
-namespace Translator\Traits;
+namespace AB\Laravel\Translator\Traits;
 
 use Illuminate\Filesystem\Filesystem;
-use Translator\Facades\ResourceFacade;
+use AB\Laravel\Translator\Facades\ResourceFacade;
 use Symfony\Component\Finder\Finder;
 
 

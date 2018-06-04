@@ -1,4 +1,4 @@
-@extends('Translator::layout')
+@extends('ABTranslator::layout')
 
 @section('translator_content')
 <!-- /.row -->
@@ -12,7 +12,7 @@
                     </div>
                     <div class="col-xs-9 text-right">
                         <div class="huge">{{ $messagesCount }}</div>
-                        <div>{{ trans('translator::messages.messages') }}</div>
+                        <div>{{ trans('abtranslator::messages.messages') }}</div>
                     </div>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                     </div>
                     <div class="col-xs-9 text-right">
                         <div class="huge">{{ $untranslatedMessagesCount }}</div>
-                        <div>{{ trans('translator::messages.untranslated_messages') }}</div>
+                        <div>{{ trans('abtranslator::messages.untranslated_messages') }}</div>
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                     </div>
                     <div class="col-xs-9 text-right">
                         <div class="huge">{{ $languagesCount }}</div>
-                        <div>{{ trans('translator::messages.languages') }}</div>
+                        <div>{{ trans('abtranslator::messages.languages') }}</div>
                     </div>
                 </div>
             </div>
@@ -54,7 +54,7 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <i class="fa fa-list-ul fa-fw"></i> {{ trans('translator::messages.languages') }}
+                <i class="fa fa-list-ul fa-fw"></i> {{ trans('abtranslator::messages.languages') }}
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
@@ -63,7 +63,7 @@
                     @foreach ($languages as $language)
                     <a href="{{ route('translator_language', ['language' => $language['locale']]) }}" class="list-group-item">
                         <i class="flag-icon flag-icon-{{ $language['country'] }}"></i> {{ $language['name'] }}
-                        <span class="pull-right text-muted small"><em>{{ trans_choice('translator::messages.all_messages_count', $language['messages'], ['value' => $language['messages']]) }}, {{ trans_choice('translator::messages.untranslated_messages_count', $language['untranslated'], ['value' => $language['untranslated']]) }}</em></span>
+                        <span class="pull-right text-muted small"><em>{{ trans_choice('abtranslator::messages.all_messages_count', $language['messages'], ['value' => $language['messages']]) }}, {{ trans_choice('abtranslator::messages.untranslated_messages_count', $language['untranslated'], ['value' => $language['untranslated']]) }}</em></span>
                     </a>
                     @endforeach
                 </div>

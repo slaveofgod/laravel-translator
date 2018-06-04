@@ -1,6 +1,6 @@
 <?php
 
-namespace Translator\Traits;
+namespace AB\Laravel\Translator\Traits;
 
 use Symfony\Component\Finder\Finder;
 use Illuminate\Filesystem\Filesystem;

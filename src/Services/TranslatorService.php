@@ -1,10 +1,10 @@
 <?php
 
-namespace Translator\Services;
+namespace AB\Laravel\Translator\Services;
 
 use Symfony\Component\Finder\Finder; // https://symfony.com/doc/current/components/finder.html
 use Illuminate\Filesystem\Filesystem;
-use Translator\Facades\ResourceFacade;
+use AB\Laravel\Translator\Facades\ResourceFacade;
 
 
 /**
@@ -12,9 +12,9 @@ use Translator\Facades\ResourceFacade;
  */
 class TranslatorService
 {
-    use \Translator\Traits\ResourceTrait;
+    use \AB\Laravel\Translator\Traits\ResourceTrait;
     
-    use \Translator\Traits\MessageTrait;
+    use \AB\Laravel\Translator\Traits\MessageTrait;
     
     /**
      *

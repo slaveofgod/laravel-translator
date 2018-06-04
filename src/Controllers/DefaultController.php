@@ -1,11 +1,11 @@
 <?php
 
-namespace Translator\Controllers;
+namespace AB\Laravel\Translator\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use Symfony\Component\Finder\Finder;
-use Translator\Services\TranslatorService;
+use AB\Laravel\Translator\Services\TranslatorService;
 
 class DefaultController extends BaseController
 {
@@ -74,8 +74,8 @@ class DefaultController extends BaseController
             $messagesCount += $languages[$key]['messages'];
         }
         
-        return view('Translator::Default/Index', [
-            'title' => \Lang::get('translator::messages.dashboard'),
+        return view('ABTranslator::Default/Index', [
+            'title' => \Lang::get('abtranslator::messages.dashboard'),
             'languages' => $languages,
             'messagesCount' => $messagesCount,
             'untranslatedMessagesCount' => $untranslatedMessagesCount,
@@ -114,8 +114,8 @@ class DefaultController extends BaseController
             ];
         }
         
-        return view('Translator::Default/Language', [
-            'title' => \Lang::get('translator::messages.language_translation_messages', ['value' => \Locale::getDisplayLanguage($language, \App::getLocale())]),
+        return view('ABTranslator::Default/Language', [
+            'title' => \Lang::get('abtranslator::messages.language_translation_messages', ['value' => \Locale::getDisplayLanguage($language, \App::getLocale())]),
             'resources' => $resources,
             'language' => $language
         ]);
