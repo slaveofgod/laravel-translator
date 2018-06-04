@@ -41,8 +41,6 @@ class ServiceProvider extends BaseServiceProvider
                 \AB\Laravel\Translator\Console\TranslationDiffCommand::class,
                 \AB\Laravel\Translator\Console\TranslationUntrackedCommand::class,
             ]);
-            
-//            $this->validationRules();
         }
         
         // Views
@@ -69,24 +67,6 @@ class ServiceProvider extends BaseServiceProvider
         \Config::set('translator_log', 'translator.log');
         \Config::set('resource_path', __DIR__ . '/Resources/test');
     }
-    
-//    /**
-//     * @return void
-//     */
-//    private function validationRules()
-//    {
-//        \Validator::extend('locale', function($attribute, $value, $parameters, $validator) {
-//
-//            $rule = new LocaleValidationRule();
-//
-//            if (true === $rule->passes($attribute, $value)) {
-//                
-//                return true;
-//            }
-//            
-//            return false;
-//        });
-//    }
     
     /**
      * @link https://laravel.com/docs/5.5/blade#extending-blade
