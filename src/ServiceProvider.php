@@ -1,8 +1,8 @@
 <?php
 
-namespace Translator;
+namespace AB\Laravel\Translator;
 
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Translator\Validation\Rules\LocaleValidationRule;
 use Illuminate\Support\Facades\Blade;
 
@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Blade;
 /**
  * @author Alexey Bob <alexey.bob@gmail.com>
  */
-class TranslatorServiceProvider extends ServiceProvider
+class ServiceProvider extends BaseServiceProvider
 {
     /**
      * Bootstrap the application services.

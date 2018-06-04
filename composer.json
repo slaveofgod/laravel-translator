@@ -28,7 +28,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Translator\\": "src/"
+            "AB\\Laravel\\Translator\\": "src/"
         },
         "files": [
             "src/Helpers/CommonHelper.php"
@@ -36,13 +36,13 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Translator\\Tests\\": "tests/"
+            "AB\\Laravel\\Translator\\Tests\\": "tests/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Translator\\TranslatorServiceProvider"
+                "AB\\Laravel\\Translator\\ServiceProvider"
             ]
         }
     },
