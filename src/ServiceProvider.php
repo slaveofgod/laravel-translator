@@ -43,20 +43,8 @@ class ServiceProvider extends BaseServiceProvider
             ]);
         }
         
-        // Views
-        $this->loadViewsFrom(__DIR__.'/Resources/views', 'ABTranslator');
-        
-        // Routes
-        $this->loadRoutesFrom(__DIR__.'/Resources/routes/web.php');
-        
-        // Public Assets
-        // php artisan vendor:publish --tag=abtranslator --force
-        $this->publishes([
-            __DIR__.'/Resources/public/skins' => public_path('vendor/abtranslator'),
-        ], 'abtranslator');
-        
         // Translations
-        $this->loadTranslationsFrom(__DIR__.'/Resources/lang', 'abtranslator');
+        $this->loadTranslationsFrom(__DIR__.'/Resources/lang', 'abtLang');
     }
     
     /**
@@ -65,7 +53,7 @@ class ServiceProvider extends BaseServiceProvider
     private function setConfig()
     {
         \Config::set('translator_log', 'translator.log');
-        \Config::set('resource_path', __DIR__ . '/Resources/test');
+        \Config::set('resource_path', __DIR__ . '/Resources');
     }
     
     /**

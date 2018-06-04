@@ -34,6 +34,6 @@ class Locale implements Rule
      */
     public function message()
     {
-        return trans('abtranslator::validation.locale');
+        return trans('abtLang::validation.locale');
     }
 }
