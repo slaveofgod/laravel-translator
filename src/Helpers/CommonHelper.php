@@ -2,6 +2,9 @@
 
 use Illuminate\Filesystem\Filesystem;
 
+/**
+ * @author Alexey Bob <alexey.bob@gmail.com>
+ */
 if (! function_exists('__ab')) {
     /**
      * Translate the given message.
@@ -64,24 +67,5 @@ if (! function_exists('trans_choice_ab')) {
             );
         
         return trans_choice($key, $number, $replace, $locale);
-    }
-}
-
-
-if (! function_exists('locale_country')) {
-    /**
-     * Get country by locale.
-     *
-     * @param  string  $locale
-     * 
-     * @return string
-     */
-    function locale_country(string $locale)
-    {
-        $data = [
-            'en' => 'gb'
-        ];
-
-        return isset($data[$locale]) ?  $data[$locale] : $locale;
     }
 }

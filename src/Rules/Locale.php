@@ -5,6 +5,10 @@ namespace AB\Laravel\Translator\Rules;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Filesystem\Filesystem;
 
+
+/**
+ * @author Alexey Bob <alexey.bob@gmail.com>
+ */
 class Locale implements Rule
 {
     /**
