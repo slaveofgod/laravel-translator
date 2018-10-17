@@ -95,7 +95,7 @@ class TranslationUpdateCommand extends Command
         }
         
         // Define resource path
-        $template_path = $resource_path . '/' . $this->argument('path');
+        $template_path = $resource_path . DIRECTORY_SEPARATOR . $this->argument('path');
         if (!is_dir($template_path)) {
             $this->error(sprintf('"%s" is neither a file nor a directory of resources.', $this->argument('path')));
             

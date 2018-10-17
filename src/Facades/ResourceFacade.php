@@ -136,7 +136,7 @@ class ResourceFacade
      */
     public function getRelativePathname()
     {
-        return str_replace($this->resource_path . '/', "", $this->path);
+        return str_replace($this->resource_path . DIRECTORY_SEPARATOR, "", $this->path);
     }
     
     /**
@@ -145,7 +145,7 @@ class ResourceFacade
      */
     public function getLocalPathname()
     {
-        return str_replace($this->resource_path . '/lang/', "", $this->path);
+        return str_replace($this->resource_path . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR, "", $this->path);
     }
     
     /**
@@ -281,7 +281,7 @@ class ResourceFacade
      */
     private function backup()
     {
-        $filePath = $this->resource_path . '/lang/backup/' . $this->backupName . '/' . $this->getLocalPathname();
+        $filePath = $this->resource_path . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR . 'backup' . DIRECTORY_SEPARATOR . $this->backupName . DIRECTORY_SEPARATOR . $this->getLocalPathname();
         if (false === \File::isDirectory(dirname($filePath))) {
             \File::makeDirectory(dirname($filePath), 0755, true);
         }

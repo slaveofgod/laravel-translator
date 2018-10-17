@@ -93,9 +93,9 @@ trait MessageTrait
     public function addNewMessages()
     {
         foreach ($this->getNewMessages() as $message) {
-            $filePath = $this->resource_path . '/lang/' . $this->locale . '.json';
+            $filePath = $this->resource_path . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR . $this->locale . '.json';
             if (preg_match('/(^[a-zA-Z0-9]+)\.([\S].*)/', $message, $match)) {
-                $filePath = $this->resource_path . '/lang/' . $this->locale . '/' . $match[1] . '.php';
+                $filePath = $this->resource_path . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR . $this->locale . DIRECTORY_SEPARATOR . $match[1] . '.php';
                 $message = $match[2];
             }
             
@@ -132,7 +132,7 @@ trait MessageTrait
     {
         $contents = [];
         try {
-            $contents = explode(PHP_EOL, (new Filesystem)->get(base_path(sprintf('storage/logs/%s', \Config::get('translator_log')))));
+            $contents = explode(PHP_EOL, (new Filesystem)->get(base_path(sprintf('storage' . DIRECTORY_SEPARATOR . 'logs' . DIRECTORY_SEPARATOR . '%s', \Config::get('translator_log')))));
         } catch (\Exception $ex) {}
         
         foreach ($contents as $content) {

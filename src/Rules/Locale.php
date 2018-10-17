@@ -22,7 +22,7 @@ class Locale implements Rule
     public function passes($attribute, $value)
     {
         try {
-            $path = __DIR__ . '/../Storage/locales.json';
+            $path = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'Storage' . DIRECTORY_SEPARATOR . 'locales.json';
             $content = json_decode((new Filesystem)->get($path), true);
             
             return (true === array_key_exists($value, $content));

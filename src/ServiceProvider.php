@@ -44,7 +44,7 @@ class ServiceProvider extends BaseServiceProvider
         }
         
         // Translations
-        $this->loadTranslationsFrom(__DIR__.'/Resources/lang', 'abtLang');
+        $this->loadTranslationsFrom(__DIR__. DIRECTORY_SEPARATOR .'Resources' . DIRECTORY_SEPARATOR . 'lang', 'abtLang');
     }
     
     /**
@@ -53,7 +53,7 @@ class ServiceProvider extends BaseServiceProvider
     private function setConfig()
     {
         \Config::set('translator_log', 'translator.log');
-        \Config::set('resource_path', __DIR__ . '/Resources');
+        \Config::set('resource_path', __DIR__ . DIRECTORY_SEPARATOR . 'Resources');
     }
     
     /**

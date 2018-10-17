@@ -45,7 +45,7 @@ trait ResourceTrait
          * resources/lang/{$locale}.json
          */
         try {
-            $path = $this->resource_path . '/lang/' . $this->locale . '.json';
+            $path = $this->resource_path . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR . $this->locale . '.json';
             $content = (new Filesystem)->get($path);
             
             $this->addResource($path, 'json');
@@ -56,7 +56,7 @@ trait ResourceTrait
          * resources/lang/{$locale}/*.php
          */
         try {
-            $path = $this->resource_path . '/lang/' . $this->locale . '/';
+            $path = $this->resource_path . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR . $this->locale . DIRECTORY_SEPARATOR;
             $finder = new Finder();
             $finder->files()->name('*.php')->in($path);
             foreach ($finder as $file) {

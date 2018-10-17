@@ -25,7 +25,7 @@ if (! function_exists('__ab')) {
         
         // Search translation in {locale}.json file
         try {
-            $content = json_decode((new Filesystem)->get(resource_path('lang/' . app()->getLocale() . '.json')), true);
+            $content = json_decode((new Filesystem)->get(resource_path('lang' . DIRECTORY_SEPARATOR . app()->getLocale() . '.json')), true);
             if (isset($content[$key])) {
                 return __($key, $replace, $locale);
             }
@@ -33,7 +33,7 @@ if (! function_exists('__ab')) {
         
         // Save to log file when translation does not exist for this $key
         (new Filesystem)->append(
-                base_path(sprintf('storage/logs/%s', \Config::get('translator_log'))),
+                base_path(sprintf('storage' . DIRECTORY_SEPARATOR . 'logs' . DIRECTORY_SEPARATOR . '%s', \Config::get('translator_log'))),
                 json_encode(array('message' => $key, 'locale' => app()->getLocale())) . "\n"
             );
         
@@ -62,7 +62,7 @@ if (! function_exists('trans_choice_ab')) {
         
         // Save to log file when translation does not exist for this $key
         (new Filesystem)->append(
-                base_path(sprintf('storage/logs/%s', \Config::get('translator_log'))),
+                base_path(sprintf('storage' . DIRECTORY_SEPARATOR . 'logs' . DIRECTORY_SEPARATOR . '%s', \Config::get('translator_log'))),
                 json_encode(array('message' => $key, 'locale' => app()->getLocale())) . "\n"
             );
         

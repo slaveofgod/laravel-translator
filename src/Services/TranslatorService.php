@@ -84,7 +84,8 @@ class TranslatorService
         $this->template_path = $template_path;
         $this->prefixes = $prefixes;
         $this->dev = $dev;
-        $this->backupName = (null !== $backupName) ? $backupName : date('Y-m-d\TH:i:s');
+//        $this->backupName = (null !== $backupName) ? $backupName : date('Y-m-d\TH:i:s');
+        $this->backupName = (null !== $backupName) ? $backupName : date('U');
         
         $this->loadResources();
         if ('view' === $extract) {
@@ -156,7 +157,7 @@ class TranslatorService
      * 
      * @param string $hesh
      * 
-     * @return @return ResourceFacade
+     * @return ResourceFacade
      */
     public function getResourceByHesh($hesh)
     {
