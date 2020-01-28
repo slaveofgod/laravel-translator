@@ -5,7 +5,7 @@ The most time-consuming tasks when translating an application is to extract all 
 ## Installation
 
 ```sh
-$ composer require alexeybob/laravel-translator dev-master
+$ composer require slaveofgod/laravel-translator dev-master
 ```
 
 ## Commands:

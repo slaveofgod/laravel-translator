@@ -8,7 +8,7 @@ use AB\Laravel\Translator\Facades\ResourceFacade;
 
 
 /**
- * @author Alexey Bob <alexey.bob@gmail.com>
+ * @author Slave of God <iamtheslaveofgod@gmail.com>
  */
 class TranslatorService
 {

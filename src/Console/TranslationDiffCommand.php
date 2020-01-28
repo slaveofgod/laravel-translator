@@ -11,7 +11,7 @@ use AB\Laravel\Translator\Rules\Locale;
  * A command that parses templates to extract translation messages and
  * displays them to the console.
  *
- * @author Alexey Bob <alexey.bob@gmail.com>
+ * @author Slave of God <iamtheslaveofgod@gmail.com>
  *
  * @final
  * @example php artisan translation:diff en

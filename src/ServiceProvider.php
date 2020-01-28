@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Blade;
 
 
 /**
- * @author Alexey Bob <alexey.bob@gmail.com>
+ * @author Slave of God <iamtheslaveofgod@gmail.com>
  */
 class ServiceProvider extends BaseServiceProvider
 {

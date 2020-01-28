@@ -6,7 +6,7 @@ use Illuminate\Filesystem\Filesystem;
 
 
 /**
- * @author Alexey Bob <alexey.bob@gmail.com>
+ * @author Slave of God <iamtheslaveofgod@gmail.com>
  */
 class ResourceFacade
 {

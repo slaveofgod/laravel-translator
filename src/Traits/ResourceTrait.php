@@ -8,7 +8,7 @@ use Symfony\Component\Finder\Finder;
 
 
 /**
- * @author Alexey Bob <alexey.bob@gmail.com>
+ * @author Slave of God <iamtheslaveofgod@gmail.com>
  */
 trait ResourceTrait
 {
