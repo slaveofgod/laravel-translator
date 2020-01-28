@@ -1,5 +1,5 @@
 {
-    "name": "alexeybob/laravel-translator",
+    "name": "slaveofgod/laravel-translator",
     "description": "PHP Laravel artisan command that extracting translation contents and updating translation files automatically",
     "type": "library",
     "keywords": [
@@ -10,12 +10,12 @@
         "localization",
 	"command"
     ],
-    "homepage": "https://github.com/alexeybob/laravel-translator",
+    "homepage": "https://github.com/slaveofgod/laravel-translator",
     "license": "MIT",
     "authors": [
         {
-            "name": "Alexey Bob",
-            "email": "alexey.bob@gmail.com"
+            "name": "Slave of God",
+            "email": "iamtheslaveofgod@gmail.com"
         }
     ],
     "require": {

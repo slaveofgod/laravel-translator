@@ -1,2 +1,3 @@
 *.back
+.idea/
 src/Resources/test/lang/*
